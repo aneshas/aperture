@@ -20,18 +20,25 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="CoreAdapters" t="Include">
           <e p="ApertureAgentBuilder.cs" t="Include" />
-          <e p="IEventStore.cs" t="Include" />
-          <e p="OneForAll.cs" t="Include" />
-          <e p="OneForOne.cs" t="Include" />
-          <e p="Projection.cs" t="Include" />
-          <e p="PullEventStream.cs" t="Include" />
-          <e p="RestartWithBackOff.cs" t="Include" />
+          <e p="EventStreams" t="Include">
+            <e p="IEventStore.cs" t="Include" />
+            <e p="PullEventStream.cs" t="Include" />
+          </e>
+          <e p="Projections" t="Include">
+            <e p="TxProjection.cs" t="Include" />
+          </e>
+          <e p="SupervisionStrategies" t="Include">
+            <e p="OneForAll.cs" t="Include" />
+            <e p="OneForOne.cs" t="Include" />
+            <e p="RestartWithBackOff.cs" t="Include" />
+          </e>
         </e>
         <e p="EventData.cs" t="Include" />
-        <e p="IEventStream.cs" t="Include" />
         <e p="IHandleEvent.cs" t="Include" />
-        <e p="IOffsetTracker.cs" t="Include" />
-        <e p="ISupervisionStrategy.cs" t="Include" />
+        <e p="IProjectEvents.cs" t="Include" />
+        <e p="IStreamEvents.cs" t="Include" />
+        <e p="ISuperviseProjection.cs" t="Include" />
+        <e p="ITrackOffset.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netstandard2.1" t="Include">

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Aperture.Core.CoreAdapters
+namespace Aperture.Core.CoreAdapters.EventStreams
 {
     public interface IEventStore
     {

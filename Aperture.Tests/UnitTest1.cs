@@ -1,4 +1,5 @@
 using Aperture.Core.CoreAdapters;
+using Aperture.Core.CoreAdapters.SupervisionStrategies;
 using Xunit;
 
 namespace Aperture.Tests
@@ -9,14 +10,14 @@ namespace Aperture.Tests
         public void Test1()
         {
             var agent = ApertureAgentBuilder
-                .BuildDefault(null)
+                .CreateDefault(null)
                 .AddProjection(null)
                 .AddProjection(null)
                 .AddProjection(null)
                 .AddProjection(null)
                 // Override default settings
                 .UseEventStream(null)
-                .UseSupervisionStrategy(new RestartWithBackOff()) // TODO - Make this one default?
+                .UseProjectionSupervisor(new RestartWithBackOff()) // TODO - Make this one default?
                 .UseCancellationTokenSource(null)
                 .Configure(cfg =>
                 {
@@ -29,7 +30,7 @@ namespace Aperture.Tests
                     // retry / delay config
                 })
                 // Run it
-                .Start(); // TODO this should not block
+                .Start(); // TODO this should not block?
 
             agent.Stop();
         }

@@ -2,15 +2,15 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Aperture.Core.CoreAdapters
+namespace Aperture.Core.CoreAdapters.SupervisionStrategies
 {
     public class OneForOne : OneForAll
     {
-        public override async Task RunProjection(IEventStream eventStream, ApertureProjection projection, CancellationToken ct)
+        public override async Task Run(IStreamEvents streamEvents, IProjectEvents projection, CancellationToken ct)
         {
             try
             {
-                await base.RunProjection(eventStream, projection, ct);
+                await base.Run(streamEvents, projection, ct);
             }
             catch (Exception e)
             {

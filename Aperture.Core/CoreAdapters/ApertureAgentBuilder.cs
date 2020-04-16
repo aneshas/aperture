@@ -1,12 +1,15 @@
-﻿namespace Aperture.Core.CoreAdapters
+﻿using Aperture.Core.CoreAdapters.EventStreams;
+using Aperture.Core.CoreAdapters.SupervisionStrategies;
+
+namespace Aperture.Core.CoreAdapters
 {
     public static class ApertureAgentBuilder
     {
-        public static ApertureAgent BuildDefault(IEventStore eventStore) =>
+        public static ApertureAgent CreateDefault(IEventStore eventStore) =>
             ApertureAgent
                 .Instance()
                 .UseEventStream(new PullEventStream(eventStore))
-                .UseSupervisionStrategy(new OneForOne())
+                .UseProjectionSupervisor(new OneForOne())
                 .Configure(cfg =>
                 {
                     // TODO - Set default configuration

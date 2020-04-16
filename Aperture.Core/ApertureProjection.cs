@@ -6,27 +6,27 @@ namespace Aperture.Core
 {
     public abstract class ApertureProjection
     {
-        private readonly IOffsetTracker _offsetTracker;
+        private readonly ITrackOffset _offsetTracker;
 
-        protected ApertureProjection(IOffsetTracker offsetTracker)
+        protected ApertureProjection(ITrackOffset offsetTracker)
         {
             _offsetTracker = offsetTracker;
         }
 
         // This blocks
-        public async Task Project(IEventStream eventStream, CancellationToken ct)
+        public async Task Project(IStreamEvents streamEvents, CancellationToken ct)
         {
             var projection = GetType();
             var projectionOffset = await _offsetTracker.GetOffsetAsync(projection);
 
-            await eventStream.SubscribeAsync(
+            await streamEvents.SubscribeAsync(
                 projection, 
                 projectionOffset, 
                 ct,
-                async data => await HandleEventAsync(projection, data)); 
+                async data => await TrackAndHandleEventAsync(projection, data)); 
         }
 
-        protected abstract Task HandleEventAsync(Type projection, EventData eventData);
+        protected abstract Task TrackAndHandleEventAsync(Type projection, EventData eventData);
 
         protected Task HandleEventAsync(object @event)
         {

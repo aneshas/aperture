@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Aperture.Core
 {
-    public interface IOffsetTracker
+    public interface ITrackOffset
     {
         Task SaveOffsetAsync(Type projection, int currentOffset);
 

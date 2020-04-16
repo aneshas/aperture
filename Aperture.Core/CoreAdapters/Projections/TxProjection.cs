@@ -2,24 +2,25 @@
 using System.Threading.Tasks;
 using System.Transactions;
 
-namespace Aperture.Core.CoreAdapters
+namespace Aperture.Core.CoreAdapters.Projections
 {
-    public class Projection : ApertureProjection
+    public class TxProjection : ApertureProjection
     {
-        private readonly IOffsetTracker _offsetTracker;
+        private readonly ITrackOffset _offsetTracker;
 
         private readonly TransactionOptions _txOptions
             = new TransactionOptions
             {
+                // TODO This should probably be higher since it affects event handler also. Or configurable.
                 IsolationLevel = IsolationLevel.ReadUncommitted
             };
 
-        public Projection(IOffsetTracker offsetTracker) : base(offsetTracker)
+        public TxProjection(ITrackOffset offsetTracker) : base(offsetTracker)
         {
             _offsetTracker = offsetTracker;
         }
 
-        protected override async Task HandleEventAsync(Type projection, EventData eventData)
+        protected override async Task TrackAndHandleEventAsync(Type projection, EventData eventData)
         {
             using (var txScope = new TransactionScope(
                 TransactionScopeOption.Required, 

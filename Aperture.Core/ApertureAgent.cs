@@ -10,15 +10,15 @@ namespace Aperture.Core
     {
         private static ApertureAgent _instance;
 
-        private IEventStream _eventStream;
+        private IStreamEvents _eventStream;
         
-        private ISupervisionStrategy _supervisionStrategy;
+        private ISuperviseProjection _projectionSupervisor;
 
         private CancellationTokenSource _cts;
 
         private readonly ApertureConfiguration _configuration = new ApertureConfiguration();
 
-        private readonly List<ApertureProjection> _projections = new List<ApertureProjection>();
+        private readonly List<IProjectEvents> _projections = new List<IProjectEvents>();
 
         private ApertureAgent()
         {
@@ -33,9 +33,9 @@ namespace Aperture.Core
             return _instance;
         }
 
-        public ApertureAgent UseEventStream(IEventStream eventStream)
+        public ApertureAgent UseEventStream(IStreamEvents streamEvents)
         {
-            _eventStream = eventStream;
+            _eventStream = streamEvents;
 
             return this;
         }
@@ -47,21 +47,28 @@ namespace Aperture.Core
             return this;
         }
 
-        public ApertureAgent UseSupervisionStrategy(ISupervisionStrategy strategy)
+        public ApertureAgent UseProjectionSupervisor(ISuperviseProjection strategy)
         {
-            _supervisionStrategy = strategy;
+            _projectionSupervisor = strategy;
 
             return this;
         }
 
-        public ApertureAgent AddProjection(ApertureProjection apertureProjection)
+        public ApertureAgent AddProjection(IProjectEvents projection)
         {
             // TODO - ignore or throw if already running
-            _projections.Add(apertureProjection);
+            _projections.Add(projection);
 
             return this;
         }
 
+        public ApertureAgent AddProjection<T>(T projection) where T : IProjectEvents
+        {
+            // TODO - Activate and then add to _projections
+            
+            return this;
+        }
+        
         public ApertureAgent Configure(Action<ApertureConfiguration> configFunc)
         {
             configFunc(_configuration);
@@ -74,16 +81,9 @@ namespace Aperture.Core
         {
             // TODO - Validate all fields are set
             // Run projections in parallel tasks
-            // provide cancellation token
-
-            // Based on SupervisionStrategy:
-            // if one projection fails - cancel all and restart
-            // if one projection fails - restart it indefinitely
-            // - handle projection failures here not in projection, let projection fail
-            // - 
 
             var tasks = _projections.Select(p => 
-                _supervisionStrategy.RunProjection(_eventStream, p, _cts.Token));
+                _projectionSupervisor.Run(_eventStream, p, _cts.Token));
 
             Task.WhenAll(tasks); // This will block until cts is cancelled
 
@@ -95,7 +95,5 @@ namespace Aperture.Core
         {
             _cts.Cancel();
         }
-
-        // Then individual supervision strategy should have it's own configuration options
     }
 }

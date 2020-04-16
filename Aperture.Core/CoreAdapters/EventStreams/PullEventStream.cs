@@ -2,9 +2,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Aperture.Core.CoreAdapters
+namespace Aperture.Core.CoreAdapters.EventStreams
 {
-    public class PullEventStream : IEventStream
+    public class PullEventStream : IStreamEvents
     {
         public TimeSpan PullInterval { get; } = TimeSpan.FromMilliseconds(200);
 
@@ -20,11 +20,11 @@ namespace Aperture.Core.CoreAdapters
         public PullEventStream(IEventStore eventStore, TimeSpan pullInterval, int batchSize)
         {
             _eventStore = eventStore;
+            
             PullInterval = pullInterval;
             BatchSize = batchSize;
         }
 
-        // TODO Maybe add cancellation token 
         public async Task SubscribeAsync(Type projection, int fromOffset, CancellationToken ct, Action<EventData> handleEvent)
         {
             while (true)
