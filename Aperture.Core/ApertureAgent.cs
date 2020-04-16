@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Aperture.Core
 {
     public partial class ApertureAgent
     {
         private static ApertureAgent _instance;
+
+        private IEventStream _eventStream;
         
         private ISupervisionStrategy _supervisionStrategy;
 
@@ -27,6 +31,13 @@ namespace Aperture.Core
                 _instance = new ApertureAgent();
 
             return _instance;
+        }
+
+        public ApertureAgent UseEventStream(IEventStream eventStream)
+        {
+            _eventStream = eventStream;
+
+            return this;
         }
 
         public ApertureAgent UseCancellationTokenSource(CancellationTokenSource cts)
@@ -71,6 +82,10 @@ namespace Aperture.Core
             // - handle projection failures here not in projection, let projection fail
             // - 
 
+            var tasks = _projections.Select(p => 
+                _supervisionStrategy.RunProjection(_eventStream, p, _cts.Token));
+
+            Task.WhenAll(tasks); // This will block until cts is cancelled
 
             // Return something else instead eg. IDisposable ?
             return this;

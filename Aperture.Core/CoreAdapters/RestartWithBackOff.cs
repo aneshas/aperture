@@ -5,9 +5,9 @@ namespace Aperture.Core.CoreAdapters
 {
     public class RestartWithBackOff : ISupervisionStrategy
     {
-        public async Task RunProjection(ApertureProjection projection, CancellationToken ct)
+        public async Task RunProjection(IEventStream eventStream, ApertureProjection projection, CancellationToken ct)
         {
-            await projection.Project(ct);
+            await projection.Project(eventStream, ct);
         }
     }
 }

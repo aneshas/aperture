@@ -5,6 +5,7 @@
         public static ApertureAgent BuildDefault(IEventStore eventStore) =>
             ApertureAgent
                 .Instance()
+                .UseEventStream(new PullEventStream(eventStore))
                 .UseSupervisionStrategy(new OneForOne())
                 .Configure(cfg =>
                 {

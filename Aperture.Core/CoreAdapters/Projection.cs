@@ -14,8 +14,7 @@ namespace Aperture.Core.CoreAdapters
                 IsolationLevel = IsolationLevel.ReadUncommitted
             };
 
-        public Projection(IEventStream eventStream, IOffsetTracker offsetTracker) 
-            : base(eventStream, offsetTracker)
+        public Projection(IOffsetTracker offsetTracker) : base(offsetTracker)
         {
             _offsetTracker = offsetTracker;
         }

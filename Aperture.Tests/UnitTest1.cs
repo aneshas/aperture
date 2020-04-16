@@ -15,6 +15,7 @@ namespace Aperture.Tests
                 .AddProjection(null)
                 .AddProjection(null)
                 // Override default settings
+                .UseEventStream(null)
                 .UseSupervisionStrategy(new RestartWithBackOff()) // TODO - Make this one default?
                 .UseCancellationTokenSource(null)
                 .Configure(cfg =>
