@@ -14,7 +14,8 @@ namespace Aperture.Core.CoreAdapters
                 IsolationLevel = IsolationLevel.ReadUncommitted
             };
 
-        public Projection(IOffsetTracker offsetTracker) : base(offsetTracker)
+        public Projection(IEventStream eventStream, IOffsetTracker offsetTracker) 
+            : base(eventStream, offsetTracker)
         {
             _offsetTracker = offsetTracker;
         }
@@ -32,15 +33,5 @@ namespace Aperture.Core.CoreAdapters
                 txScope.Complete();
             }
         }
-    }
-
-    // Implement IHandleEvent stuff
-    public class CustomersBaseProjection : Projection
-    {
-        public CustomersBaseProjection(IOffsetTracker offsetTracker) : base(offsetTracker)
-        {
-        }
-
-        // Event Handlers
     }
 }

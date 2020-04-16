@@ -6,14 +6,11 @@ namespace Aperture.Core.CoreAdapters
 {
     public class OneForOne : OneForAll
     {
-        public override async Task RunProjection(
-            ApertureProjection projection,
-            IEventStream eventStream,
-            CancellationToken ct)
+        public override async Task RunProjection(ApertureProjection projection, CancellationToken ct)
         {
             try
             {
-                await base.RunProjection(projection, eventStream, ct);
+                await base.RunProjection(projection, ct);
             }
             catch (Exception e)
             {

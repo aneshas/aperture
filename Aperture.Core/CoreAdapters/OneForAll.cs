@@ -5,7 +5,7 @@ namespace Aperture.Core.CoreAdapters
 {
     public class OneForAll : ISupervisionStrategy
     {
-        public virtual async Task RunProjection(ApertureProjection projection, IEventStream eventStream, CancellationToken ct) =>
-            await projection.Project(eventStream, ct);
+        public virtual async Task RunProjection(ApertureProjection projection, CancellationToken ct) =>
+            await projection.Project(ct);
     }
 }

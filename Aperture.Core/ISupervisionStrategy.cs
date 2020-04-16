@@ -5,6 +5,6 @@ namespace Aperture.Core
 {
     public interface ISupervisionStrategy
     {
-        Task RunProjection( ApertureProjection projection, IEventStream eventStream, CancellationToken ct);
+        Task RunProjection(ApertureProjection projection,  CancellationToken ct);
     }
 }

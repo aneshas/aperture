@@ -8,8 +8,6 @@ namespace Aperture.Core
     {
         private static ApertureAgent _instance;
         
-        private IEventStream _eventStream;
-
         private ISupervisionStrategy _supervisionStrategy;
 
         private CancellationTokenSource _cts;
@@ -34,13 +32,6 @@ namespace Aperture.Core
         public ApertureAgent UseCancellationTokenSource(CancellationTokenSource cts)
         {
             _cts = cts;
-
-            return this;
-        }
-
-        public ApertureAgent UseEventStream(IEventStream eventStream)
-        {
-            _eventStream = eventStream;
 
             return this;
         }
