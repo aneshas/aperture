@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -7,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Aperture.Core
 {
-    public partial class ApertureAgent
+    public class ApertureAgent
     {
         private static ApertureAgent _instance;
 

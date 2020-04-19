@@ -6,6 +6,6 @@ namespace Aperture.Core
     public interface IProjectEvents
     {
 
-        Task Project(IStreamEvents streamEvents, CancellationToken ct);
+        Task ProjectAsync(IStreamEvents streamEvents, CancellationToken ct);
     }
 }

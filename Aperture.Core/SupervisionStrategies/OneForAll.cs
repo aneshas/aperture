@@ -6,6 +6,6 @@ namespace Aperture.Core.SupervisionStrategies
     public class OneForAll : ISuperviseProjection
     {
         public virtual async Task Run(IStreamEvents streamEvents, IProjectEvents projection, CancellationToken ct) =>
-            await projection.Project(streamEvents, ct);
+            await projection.ProjectAsync(streamEvents, ct);
     }
 }

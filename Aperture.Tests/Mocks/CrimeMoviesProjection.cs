@@ -16,7 +16,7 @@ namespace Aperture.Tests.Mocks
             Console.WriteLine($"Starting {GetType().Name}...");
         }
 
-        public Task Handle(MovieAddedToCatalogue @event)
+        public Task HandleAsync(MovieAddedToCatalogue @event)
         {
             if (@event.Genre != Genre.Crime) return Task.CompletedTask;
             

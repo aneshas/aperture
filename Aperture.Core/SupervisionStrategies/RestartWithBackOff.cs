@@ -8,7 +8,7 @@ namespace Aperture.Core.SupervisionStrategies
         // TODO Add ctor with options
         public async Task Run(IStreamEvents streamEvents, IProjectEvents projection, CancellationToken ct)
         {
-            await projection.Project(streamEvents, ct);
+            await projection.ProjectAsync(streamEvents, ct);
         }
     }
 }
