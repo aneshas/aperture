@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Aperture.Core
 {
-    public abstract class ApertureProjection
+    public abstract class ApertureProjection : IProjectEvents
     {
         private readonly ITrackOffset _offsetTracker;
 
@@ -13,7 +13,6 @@ namespace Aperture.Core
             _offsetTracker = offsetTracker;
         }
 
-        // This blocks
         public async Task Project(IStreamEvents streamEvents, CancellationToken ct)
         {
             var projection = GetType();

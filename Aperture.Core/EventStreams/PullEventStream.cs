@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Aperture.Core.CoreAdapters.EventStreams
+namespace Aperture.Core.EventStreams
 {
     public class PullEventStream : IStreamEvents
     {
@@ -37,8 +38,14 @@ namespace Aperture.Core.CoreAdapters.EventStreams
                 
                 if(eventBatch == null) continue;
 
-                foreach (var eventData in eventBatch)
+                var batchArray = eventBatch.ToArray();
+                
+                if (batchArray.Length == 0) continue;
+
+                foreach (var eventData in batchArray)
                     handleEvent(eventData);
+
+                fromOffset += batchArray.Length;
             }
         }
     }

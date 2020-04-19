@@ -4,10 +4,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aperture.Core", "Aperture.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aperture.Tests", "Aperture.Tests\Aperture.Tests.csproj", "{6818CC68-409B-4B3A-B0FA-C5E65A4D76A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aperture.SqlAdapters", "Aperture.SqlAdapters\Aperture.SqlAdapters.csproj", "{91EDAC64-0189-4F99-8CBE-16C985C4CFB7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aperture.EventStoreAdapters", "Aperture.EventStoreAdapters\Aperture.EventStoreAdapters.csproj", "{51373956-2540-40B6-9F96-F7C66F937D6A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,13 +18,5 @@ Global
 		{6818CC68-409B-4B3A-B0FA-C5E65A4D76A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6818CC68-409B-4B3A-B0FA-C5E65A4D76A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6818CC68-409B-4B3A-B0FA-C5E65A4D76A3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{91EDAC64-0189-4F99-8CBE-16C985C4CFB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{91EDAC64-0189-4F99-8CBE-16C985C4CFB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{91EDAC64-0189-4F99-8CBE-16C985C4CFB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{91EDAC64-0189-4F99-8CBE-16C985C4CFB7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{51373956-2540-40B6-9F96-F7C66F937D6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{51373956-2540-40B6-9F96-F7C66F937D6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{51373956-2540-40B6-9F96-F7C66F937D6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{51373956-2540-40B6-9F96-F7C66F937D6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

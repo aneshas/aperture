@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
-namespace Aperture.Core.CoreAdapters.SupervisionStrategies
+namespace Aperture.Core.SupervisionStrategies
 {
     public class OneForAll : ISuperviseProjection
     {

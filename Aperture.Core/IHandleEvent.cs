@@ -4,6 +4,6 @@ namespace Aperture.Core
 {
     public interface IHandleEvent<in T>
     {
-        Task HandleEvent(T @event);
+        Task Handle(T @event);
     }
 }

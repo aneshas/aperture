@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -11,7 +12,7 @@ namespace Aperture.Core
         private static ApertureAgent _instance;
 
         private IStreamEvents _eventStream;
-        
+
         private ISuperviseProjection _projectionSupervisor;
 
         private CancellationTokenSource _cts;
@@ -47,9 +48,9 @@ namespace Aperture.Core
             return this;
         }
 
-        public ApertureAgent UseProjectionSupervisor(ISuperviseProjection strategy)
+        public ApertureAgent UseSupervisor(ISuperviseProjection supervisor)
         {
-            _projectionSupervisor = strategy;
+            _projectionSupervisor = supervisor;
 
             return this;
         }
@@ -62,13 +63,13 @@ namespace Aperture.Core
             return this;
         }
 
-        public ApertureAgent AddProjection<T>(T projection) where T : IProjectEvents
+        public ApertureAgent AddProjection<T>() where T : IProjectEvents
         {
             // TODO - Activate and then add to _projections
-            
+
             return this;
         }
-        
+
         public ApertureAgent Configure(Action<ApertureConfiguration> configFunc)
         {
             configFunc(_configuration);
@@ -76,19 +77,25 @@ namespace Aperture.Core
             return this;
         }
 
-        // TODO - How to best handle this
-        public ApertureAgent Start()
+        // Let caller handle where to run it eg. topshelf, hangfire job, net core worker service etc...
+        public void Run()
         {
             // TODO - Validate all fields are set
-            // Run projections in parallel tasks
 
-            var tasks = _projections.Select(p => 
-                _projectionSupervisor.Run(_eventStream, p, _cts.Token));
+            var actions = _projections
+                .Select(p => (Action) (async () => await _projectionSupervisor.Run(_eventStream, p, _cts.Token)))
+                .ToArray();
 
-            Task.WhenAll(tasks); // This will block until cts is cancelled
-
-            // Return something else instead eg. IDisposable ?
-            return this;
+            try
+            {
+                Parallel.Invoke(actions);
+            }
+            catch (Exception e)
+            {
+                // TODO - Log
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         public void Stop()

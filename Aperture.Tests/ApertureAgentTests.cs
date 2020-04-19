@@ -1,0 +1,95 @@
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using Aperture.Core;
+using Aperture.Core.SupervisionStrategies;
+using Aperture.Tests.Mocks;
+using FluentAssertions;
+using Moq;
+using Xunit;
+
+namespace Aperture.Tests
+{
+    public class ApertureAgentTests
+    {
+        [Fact]
+        public void Default_Configuration_Projects_Events()
+        {
+            var sciFiEvents = new List<IEvent>
+            {
+                new MovieAddedToCatalogue("A third movie", Genre.SciFi),
+                new MovieAddedToCatalogue("Fourth movie", Genre.SciFi),
+
+            };
+
+            var crimeEvents = new List<IEvent>
+            {
+                new MovieAddedToCatalogue("A movie", Genre.Crime),
+                new MovieAddedToCatalogue("A second movie", Genre.Crime),
+                new MovieAddedToCatalogue("Another movie", Genre.Crime)
+            };
+            
+            sciFiEvents.AddRange(crimeEvents);
+            
+            var eventStore = new EventStore(
+                sciFiEvents
+            );
+
+            var offsetTracker = new Mock<ITrackOffset>();
+
+            offsetTracker
+                .Setup(t => t.GetOffsetAsync(It.IsAny<Type>()))
+                .ReturnsAsync(0);
+
+            var sciFiProjection = new SciFiMoviesProjection(offsetTracker.Object);
+            var crimeProjection = new CrimeMoviesProjection(offsetTracker.Object);
+
+            // TODO - Figure out how to complete on success 
+            var cts = new CancellationTokenSource(1000);
+
+            ApertureAgentBuilder
+                .CreateDefault(eventStore)
+                .UseCancellationTokenSource(cts)
+                .AddProjection(sciFiProjection)
+                .AddProjection(crimeProjection)
+                .Run();
+
+            sciFiProjection.Events
+                .Should()
+                .BeEquivalentTo(sciFiEvents);
+
+            crimeProjection.Events
+                .Should()
+                .BeEquivalentTo(crimeEvents);
+        }
+
+        [Fact]
+        public void ReferenceTest()
+        {
+            // TODO - Write first integration test - make it simple
+
+            var agent = ApertureAgentBuilder
+                .CreateDefault(null)
+                .AddProjection(new CrimeMoviesProjection(null))
+                .AddProjection<SciFiMoviesProjection>()
+                // Override default settings
+                .UseEventStream(null)
+                .UseSupervisor(new RestartWithBackOff()) // TODO - Make this one default?
+                .UseRestartWithBackOffSupervision()
+                .UseCancellationTokenSource(null)
+                .Configure(cfg =>
+                {
+                    // TODO Use methods
+                    // TODO - what do we configure here?
+                    // Figure out what to configure here
+                    // probably stuff that would be used by multiple components, maybe:
+                    // logger ?
+                    // exception handler ?
+                    // exception loggers
+                });
+
+            agent.Run();
+            agent.Stop();
+        }
+    }
+}

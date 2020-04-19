@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Transactions;
 
-namespace Aperture.Core.CoreAdapters.Projections
+namespace Aperture.Core.Projections
 {
     public class TxProjection : ApertureProjection
     {
