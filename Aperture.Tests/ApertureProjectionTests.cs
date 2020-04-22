@@ -34,7 +34,7 @@ namespace Aperture.Tests
                 stream => stream.SubscribeAsync(
                     typeof(MoviesApertureProjection), 
                     expectedOffset,
-                    CancellationToken.None, It.IsAny<Action<EventData>>()),
+                    CancellationToken.None, It.IsAny<Func<EventData, Task>>()),
                 Times.Once
             );
         }

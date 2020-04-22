@@ -7,9 +7,9 @@ namespace Aperture.Core.EventStreams
 {
     public class PullEventStream : IStreamEvents
     {
-        public TimeSpan PullInterval { get; } = TimeSpan.FromMilliseconds(200);
+        private TimeSpan _pullInterval  = TimeSpan.FromMilliseconds(200);
 
-        public int BatchSize { get; } = 500;
+        private readonly int _batchSize  = 500;
 
         private readonly IEventStore _eventStore;
 
@@ -22,19 +22,20 @@ namespace Aperture.Core.EventStreams
         {
             _eventStore = eventStore;
             
-            PullInterval = pullInterval;
-            BatchSize = batchSize;
+            _pullInterval = pullInterval;
+            _batchSize = batchSize;
         }
 
-        public async Task SubscribeAsync(Type projection, int fromOffset, CancellationToken ct, Action<EventData> handleEvent)
+        public async Task SubscribeAsync(Type projection, int fromOffset, CancellationToken ct, Func<EventData, Task> handleEvent)
         {
             while (true)
             {
-                if (ct.IsCancellationRequested) break;
+                ct.ThrowIfCancellationRequested();
                 
                 // TODO - Implement queuing here since multiple projections will be calling in
                 // + interval - probably call another private func that will sequence these calls
-                var eventBatch = await _eventStore.LoadEventsAsync(projection, fromOffset, BatchSize);
+                // it will probably be using a lock with a bounded queue - it should block when full
+                var eventBatch = await _eventStore.LoadEventsAsync(projection, fromOffset, _batchSize);
                 
                 if(eventBatch == null) continue;
 
@@ -43,7 +44,7 @@ namespace Aperture.Core.EventStreams
                 if (batchArray.Length == 0) continue;
 
                 foreach (var eventData in batchArray)
-                    handleEvent(eventData);
+                    await handleEvent(eventData);
 
                 fromOffset += batchArray.Length;
             }

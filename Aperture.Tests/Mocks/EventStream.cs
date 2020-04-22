@@ -18,7 +18,7 @@ namespace Aperture.Tests.Mocks
         public Task SubscribeAsync(
             Type projection, int fromOffset,
             CancellationToken ct,
-            Action<EventData> handleEvent)
+            Func<EventData, Task> handleEvent)
         {
             foreach (var @event in Events)
             {

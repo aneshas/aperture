@@ -73,6 +73,7 @@
             </e>
           </e>
         </e>
+        <e p="PullEventStreamTests.cs" t="Include" />
       </e>
       <e p="packages" t="ExcludeRecursive" />
     </e>

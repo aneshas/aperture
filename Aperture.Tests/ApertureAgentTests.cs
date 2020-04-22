@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Aperture.Core;
 using Aperture.Core.SupervisionStrategies;
@@ -19,7 +20,6 @@ namespace Aperture.Tests
             {
                 new MovieAddedToCatalogue("A third movie", Genre.SciFi),
                 new MovieAddedToCatalogue("Fourth movie", Genre.SciFi),
-
             };
 
             var crimeEvents = new List<IEvent>
@@ -29,10 +29,8 @@ namespace Aperture.Tests
                 new MovieAddedToCatalogue("Another movie", Genre.Crime)
             };
             
-            sciFiEvents.AddRange(crimeEvents);
-            
             var eventStore = new EventStore(
-                sciFiEvents
+                sciFiEvents.Concat(crimeEvents).ToList() 
             );
 
             var offsetTracker = new Mock<ITrackOffset>();
@@ -62,6 +60,9 @@ namespace Aperture.Tests
                 .Should()
                 .BeEquivalentTo(crimeEvents);
         }
+        
+        // TODO - Test cancellation
+        // TODO - Add more "load" tests
 
         [Fact]
         public void ReferenceTest()
