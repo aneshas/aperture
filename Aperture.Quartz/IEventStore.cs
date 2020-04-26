@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Aperture.Core;
 
-namespace Aperture.Core.EventStreams
+namespace Aperture.Quartz
 {
     public interface IEventStore
     {

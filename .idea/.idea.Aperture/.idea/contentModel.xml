@@ -1,43 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\anes\.nuget\packages\microsoft.net.test.sdk\16.5.0\build\netcoreapp2.1" t="Include">
+    <e p="$USER_HOME$/.cache/JetBrains/Rider2020.1/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/.cache/JetBrains/Rider2020.1/resharper-host/local/Transient/ReSharperHost/v201/SolutionCaches/_Aperture.388836961.00" t="ExcludeRecursive" />
+    <e p="$USER_HOME$/.nuget/packages/microsoft.net.test.sdk/16.5.0/build/netcoreapp2.1" t="Include">
       <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
     </e>
-    <e p="C:\Users\anes\.nuget\packages\microsoft.testplatform.testhost\16.5.0\build\netcoreapp2.1\x64\testhost.dll" t="Include" />
-    <e p="C:\Users\anes\.nuget\packages\microsoft.testplatform.testhost\16.5.0\build\netcoreapp2.1\x64\testhost.exe" t="Include" />
-    <e p="C:\Users\anes\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.reporters.netcoreapp10.dll" t="Include" />
-    <e p="C:\Users\anes\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.utility.netcoreapp10.dll" t="Include" />
-    <e p="C:\Users\anes\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
-    <e p="C:\Users\anes\.Rider2019.3\config\scratches" t="IncludeRecursive" />
-    <e p="C:\Users\anes\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\anes\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_Aperture.-6308484.00" t="ExcludeRecursive" />
-    <e p="C:\Users\anes\projects\Aperture" t="IncludeFlat">
+    <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.0/build/netcoreapp1.0/xunit.runner.reporters.netcoreapp10.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.0/build/netcoreapp1.0/xunit.runner.utility.netcoreapp10.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.0/build/netcoreapp1.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
       <e p="Aperture.Core" t="IncludeRecursive">
         <e p="Aperture.Core.csproj" t="IncludeRecursive" />
         <e p="ApertureAgent.cs" t="Include" />
         <e p="ApertureAgentBuilder.cs" t="Include" />
         <e p="ApertureConfiguration.cs" t="Include" />
         <e p="ApertureProjection.cs" t="Include" />
-        <e p="bin" t="ExcludeRecursive" />
         <e p="EventData.cs" t="Include" />
-        <e p="EventStreams" t="Include">
-          <e p="ApertureAgentExtensions.cs" t="Include" />
-          <e p="IEventStore.cs" t="Include" />
-          <e p="PullEventStream.cs" t="Include" />
-        </e>
         <e p="IHandleEvent.cs" t="Include" />
         <e p="IProjectEvents.cs" t="Include" />
         <e p="IStreamEvents.cs" t="Include" />
         <e p="ISuperviseProjection.cs" t="Include" />
         <e p="ITrackOffset.cs" t="Include" />
-        <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
-            <e p="netstandard2.1" t="Include">
-              <e p="Aperture.Core.AssemblyInfo.cs" t="Include" />
-            </e>
-          </e>
-        </e>
         <e p="Projections" t="Include">
           <e p="TxProjection.cs" t="Include" />
         </e>
@@ -47,13 +31,37 @@
           <e p="OneForOne.cs" t="Include" />
           <e p="RestartWithBackOff.cs" t="Include" />
         </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.1" t="Include">
+              <e p="Aperture.Core.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
       </e>
-      <e p="Aperture.sln" t="IncludeFlat" />
+      <e p="Aperture.Quartz" t="IncludeRecursive">
+        <e p="Aperture.Quartz.csproj" t="IncludeRecursive" />
+        <e p="EventBatchRequest.cs" t="Include" />
+        <e p="EventBatchResponse.cs" t="Include" />
+        <e p="IEventStore.cs" t="Include" />
+        <e p="ISubscriptionBroker.cs" t="Include" />
+        <e p="LoadEventsJob.cs" t="Include" />
+        <e p="PullEventStream.cs" t="Include" />
+        <e p="Subscription.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.1" t="Include">
+              <e p="Aperture.Quartz.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
       <e p="Aperture.Tests" t="IncludeRecursive">
         <e p="Aperture.Tests.csproj" t="IncludeRecursive" />
         <e p="ApertureAgentTests.cs" t="Include" />
         <e p="ApertureProjectionTests.cs" t="Include" />
-        <e p="bin" t="ExcludeRecursive" />
         <e p="Mocks" t="Include">
           <e p="CrimeMoviesProjection.cs" t="Include" />
           <e p="EventStore.cs" t="Include" />
@@ -61,11 +69,12 @@
           <e p="Genre.cs" t="Include" />
           <e p="IEvent.cs" t="Include" />
           <e p="MovieAddedToCatalogue.cs" t="Include" />
-          <e p="MoviesApertureProjection.cs" t="Include" />
           <e p="MovieWasRated.cs" t="Include" />
           <e p="MovieWasRemoved.cs" t="Include" />
+          <e p="MoviesApertureProjection.cs" t="Include" />
           <e p="SciFiMoviesProjection.cs" t="Include" />
         </e>
+        <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
@@ -73,8 +82,8 @@
             </e>
           </e>
         </e>
-        <e p="PullEventStreamTests.cs" t="Include" />
       </e>
+      <e p="Aperture.sln" t="IncludeFlat" />
       <e p="packages" t="ExcludeRecursive" />
     </e>
   </component>

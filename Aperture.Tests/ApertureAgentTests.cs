@@ -45,8 +45,9 @@ namespace Aperture.Tests
             // TODO - Figure out how to complete on success 
             var cts = new CancellationTokenSource(1000);
 
+            // TODO - Add mock event stream
             ApertureAgentBuilder
-                .CreateDefault(eventStore)
+                .CreateDefault()
                 .UseCancellationTokenSource(cts)
                 .AddProjection(sciFiProjection)
                 .AddProjection(crimeProjection)
@@ -70,7 +71,7 @@ namespace Aperture.Tests
             // TODO - Write first integration test - make it simple
 
             var agent = ApertureAgentBuilder
-                .CreateDefault(null)
+                .CreateDefault()
                 .AddProjection(new CrimeMoviesProjection(null))
                 .AddProjection<SciFiMoviesProjection>()
                 // Override default settings

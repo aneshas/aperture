@@ -1,14 +1,13 @@
-﻿using Aperture.Core.EventStreams;
-using Aperture.Core.SupervisionStrategies;
+﻿using Aperture.Core.SupervisionStrategies;
 
 namespace Aperture.Core
 {
     public static class ApertureAgentBuilder
     {
-        public static ApertureAgent CreateDefault(IEventStore eventStore) =>
+        // TODO - Do we need to pull this out somewhere and add quartz pull event stream as default
+        public static ApertureAgent CreateDefault() =>
             ApertureAgent
                 .Instance()
-                .UsePullEventStream(eventStore)
                 .UseOneForOneSupervision()
                 .Configure(cfg =>
                 {
