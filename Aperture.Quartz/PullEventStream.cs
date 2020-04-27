@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Aperture.Core;
@@ -9,15 +11,20 @@ namespace Aperture.Quartz
     // TODO Register this as a singleton
     public class PullEventStream : IStreamEvents, ISubscriptionBroker
     {
+        private const int BatchSize = 100; // TODO Configurable
+        
+        private readonly ConcurrentDictionary<Type, Subscription> _subscriptions
+            = new ConcurrentDictionary<Type, Subscription>();
+
         public async Task SubscribeAsync(
-            Type projection, 
-            int fromOffset, 
+            Type projection,
+            int fromOffset,
             CancellationToken ct,
             Func<EventData, Task> handleEvent)
         {
-            // TODO Create a subscription for projection (concurrent dict)
+            var subscription = SubscribeProjection(projection);
 
-            // Enqueue request via subs
+            subscription.EnqueueRequest(new EventBatchRequest(projection, fromOffset, BatchSize));
 
             // Will this cause issues and block thread build?
             try
@@ -26,26 +33,38 @@ namespace Aperture.Quartz
                 {
                     ct.ThrowIfCancellationRequested();
 
-                    // TODO Try dequeue resp from subs 
-                    // If no work continue
-                    var eventBatch = new List<EventData>();
+                    var response = subscription.DequeueResponse();
+                    
+                    if(response == null) continue;
 
-                    foreach (var eventData in eventBatch)
+                    foreach (var eventData in response.EventBatch)
                         await handleEvent(eventData);
 
-                    // Enqueue req updated offset
+                    fromOffset += response.EventBatch.Count();
+
+                    subscription.EnqueueRequest(new EventBatchRequest(projection, fromOffset, BatchSize));
                 }
             }
             catch (Exception)
             {
-                // TODO Unsubscribe
+                UnsubscribeProjection(projection);
                 throw;
             }
         }
 
-        public IEnumerable<Subscription> Subscriptions()
+        private Subscription SubscribeProjection(Type projection)
         {
-            throw new NotImplementedException();
+            var subscription = new Subscription();
+
+            _subscriptions.TryAdd(projection, subscription);
+
+            return subscription;
         }
+
+        private void UnsubscribeProjection(Type projection) =>
+            _subscriptions.TryRemove(projection, out _);
+
+        public IEnumerable<Subscription> Subscriptions() =>
+            _subscriptions.Select(entry => entry.Value);
     }
 }

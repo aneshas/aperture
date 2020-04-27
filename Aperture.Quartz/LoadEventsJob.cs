@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Aperture.Core;
 using Quartz;
 
 namespace Aperture.Quartz
@@ -15,7 +17,7 @@ namespace Aperture.Quartz
             _broker = broker;
         }
 
-        public Task Execute(IJobExecutionContext context)
+        public async Task Execute(IJobExecutionContext context)
         {
             // This will load events for all projections in sequence for this batch
             // could we parallelize this? - probably yes
@@ -24,13 +26,12 @@ namespace Aperture.Quartz
                 var request = subscription.NextRequest();
 
                 if (request == null) continue;
-                
-                // Call _eventStore.LoadEvents
-                
-                subscription.EnqueueResponse(null);
+
+                var eventBatch =
+                    await _eventStore.LoadEventsAsync(request.Projection, request.FromOffset, request.BatchSize);
+
+                subscription.EnqueueResponse(new EventBatchResponse(eventBatch ?? new List<EventData>()));
             }
-            
-            return Task.CompletedTask;
         }
     }
 }

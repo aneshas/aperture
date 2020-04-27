@@ -1,34 +1,31 @@
-using System;
 using System.Collections.Concurrent;
 
 namespace Aperture.Quartz
 {
     public class Subscription
     {
-        private readonly ConcurrentQueue<EventBatchRequest> _requestQueue;
-        private readonly ConcurrentQueue<EventBatchResponse> _responseQueue;
+        private const int RequestQueueCapacity = 1;
 
-        public Subscription(
-            ConcurrentQueue<EventBatchRequest> requestQueue,
-            ConcurrentQueue<EventBatchResponse> responseQueue)
-        {
-            _requestQueue = requestQueue;
-            _responseQueue = responseQueue;
-        }
+        private readonly BlockingCollection<EventBatchRequest> _requestQueue
+            = new BlockingCollection<EventBatchRequest>(RequestQueueCapacity);
 
-        public EventBatchRequest NextRequest()
-        {
-            throw new NotImplementedException();
-        }
+        private readonly ConcurrentQueue<EventBatchResponse> _responseQueue
+            = new ConcurrentQueue<EventBatchResponse>();
 
-        public void EnqueueRequest(EventBatchRequest request)
-        {
-            throw new NotImplementedException();
-        }
+        public EventBatchRequest NextRequest() =>
+            _requestQueue.TryTake(out var request)
+                ? request
+                : null;
 
-        public void EnqueueResponse(EventBatchResponse response)
-        {
-            throw new NotImplementedException();
-        }
+        public void EnqueueRequest(EventBatchRequest request) =>
+            _requestQueue.Add(request);
+
+        public void EnqueueResponse(EventBatchResponse response) =>
+            _responseQueue.Enqueue(response);
+
+        public EventBatchResponse DequeueResponse() =>
+            _responseQueue.TryDequeue(out var response)
+                ? response
+                : null;
     }
 }
