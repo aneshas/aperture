@@ -22,9 +22,7 @@
         <e p="IStreamEvents.cs" t="Include" />
         <e p="ISuperviseProjection.cs" t="Include" />
         <e p="ITrackOffset.cs" t="Include" />
-        <e p="Projections" t="Include">
-          <e p="TxProjection.cs" t="Include" />
-        </e>
+        <e p="PullEventStream.cs" t="Include" />
         <e p="SupervisionStrategies" t="Include">
           <e p="ApertureAgentExtensions.cs" t="Include" />
           <e p="OneForAll.cs" t="Include" />
@@ -36,6 +34,38 @@
           <e p="Debug" t="Include">
             <e p="netstandard2.1" t="Include">
               <e p="Aperture.Core.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Aperture.Example" t="IncludeRecursive">
+        <e p="Aperture.Example.csproj" t="IncludeRecursive" />
+        <e p="Events" t="Include">
+          <e p="Genre.cs" t="Include" />
+          <e p="IEvent.cs" t="Include" />
+          <e p="MovieAddedToCatalogue.cs" t="Include" />
+        </e>
+        <e p="Infrastructure" t="Include">
+          <e p="EventStore.cs" t="Include" />
+          <e p="IEventStore.cs" t="Include" />
+          <e p="OffsetTracker.cs" t="Include" />
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Projections" t="Include">
+          <e p="CrimeMovieProjection.cs" t="Include" />
+          <e p="SciFiMoviesProjection.cs" t="Include" />
+        </e>
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Worker.cs" t="Include" />
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Aperture.Example.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
         </e>
@@ -75,6 +105,7 @@
           <e p="SciFiMoviesProjection.cs" t="Include" />
         </e>
         <e p="Quartz" t="Include">
+          <e p="FooProjection.cs" t="Include" />
           <e p="PullEventStreamTests.cs" t="Include" />
           <e p="SubscriptionTests.cs" t="Include" />
         </e>
@@ -88,6 +119,18 @@
         </e>
       </e>
       <e p="Aperture.sln" t="IncludeFlat" />
+      <e p="Aperture.sql" t="IncludeRecursive">
+        <e p="Aperture.sql.csproj" t="IncludeRecursive" />
+        <e p="SqlProjection.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.1" t="Include">
+              <e p="Aperture.sql.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
       <e p="packages" t="ExcludeRecursive" />
     </e>
   </component>

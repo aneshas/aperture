@@ -16,6 +16,8 @@ namespace Aperture.Core
 
         private CancellationTokenSource _cts;
 
+        private CancellationToken? _token;
+
         private readonly ApertureConfiguration _configuration = new ApertureConfiguration();
 
         private readonly List<IProjectEvents> _projections = new List<IProjectEvents>();
@@ -43,6 +45,13 @@ namespace Aperture.Core
         public ApertureAgent UseCancellationTokenSource(CancellationTokenSource cts)
         {
             _cts = cts;
+
+            return this;
+        }
+
+        public ApertureAgent UseCancellationToken(CancellationToken token)
+        {
+            _token = token;
 
             return this;
         }
@@ -76,22 +85,21 @@ namespace Aperture.Core
             return this;
         }
 
-        // Let caller handle where to run it eg. topshelf, hangfire job, net core worker service etc...
-        public void Run()
+        public async Task StartAsync()
         {
             // TODO - Validate all fields are set
 
-            var actions = _projections
-                .Select(p => (Action) (async () => await _projectionSupervisor.Run(_eventStream, p, _cts.Token)))
-                .ToArray();
+            // TODO - Pass logger + exception handler to each supervisor
+            var tasks = _projections
+                .Select(x => _projectionSupervisor.Run(_eventStream, x, _token ?? _cts.Token));
 
             try
             {
-                Parallel.Invoke(actions);
+                // We are choosing concurrency with potential parallelism instead of Parallel.Invoke
+                await Task.WhenAny(tasks);
             }
             catch (Exception e)
             {
-                // TODO - Log
                 Console.WriteLine(e);
                 throw;
             }

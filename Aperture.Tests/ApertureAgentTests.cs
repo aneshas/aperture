@@ -51,7 +51,7 @@ namespace Aperture.Tests
                 .UseCancellationTokenSource(cts)
                 .AddProjection(sciFiProjection)
                 .AddProjection(crimeProjection)
-                .Run();
+                .StartAsync();
 
             sciFiProjection.Events
                 .Should()
@@ -90,7 +90,7 @@ namespace Aperture.Tests
                     // exception loggers
                 });
 
-            agent.Run();
+            agent.StartAsync();
             agent.Stop();
         }
     }

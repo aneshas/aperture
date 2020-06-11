@@ -8,7 +8,7 @@ namespace Aperture.Core
         public static ApertureAgent CreateDefault() =>
             ApertureAgent
                 .Instance()
-                .UseOneForOneSupervision()
+                .UseRestartWithBackOffSupervision()
                 .Configure(cfg =>
                 {
                     // TODO - Set default configuration

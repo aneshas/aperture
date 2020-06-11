@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,10 +23,10 @@ namespace Aperture.Core
             var projectionOffset = await _offsetTracker.GetOffsetAsync(projection);
 
             await streamEvents.SubscribeAsync(
-                projection, 
-                projectionOffset, 
+                projection,
+                projectionOffset,
                 ct,
-                async data => await TrackAndHandleEventAsync(projection, data)); 
+                async data => await TrackAndHandleEventAsync(projection, data));
         }
 
         protected abstract Task TrackAndHandleEventAsync(Type projection, EventData eventData);
@@ -34,16 +35,16 @@ namespace Aperture.Core
         {
             var handler = GetType()
                 .GetInterfaces()
-                .FirstOrDefault(x => 
-                    x.IsGenericType 
-                    && x.GetGenericTypeDefinition() == _handlerType 
+                .FirstOrDefault(x =>
+                    x.IsGenericType
+                    && x.GetGenericTypeDefinition() == _handlerType
                     && x.GenericTypeArguments.First() == @event.GetType());
 
             if (handler == null) return;
 
             var method = handler.GetMethods().First();
 
-            await (Task) method.Invoke(this, new [] {@event});
+            await (Task) method.Invoke(this, new[] {@event});
         }
     }
 }
