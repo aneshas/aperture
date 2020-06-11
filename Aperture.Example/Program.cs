@@ -21,20 +21,8 @@ namespace Aperture.Example
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
+                    services.AddApertureAgent();
                     services.AddHostedService<Worker>();
-                    
-                    // TODO - Extract these to extension methods
-                    
-                    // Use default Event stream from Aperture.Core
-                    services.AddSingleton<IEventStore, EventStore>();
-                    services.AddSingleton<IStreamEvents, PullEventStream>();
-                    
-                    // Use custom offset tracker TODO - Use tracker from sql package
-                    services.AddSingleton<ITrackOffset, OffsetTracker>();
-                    
-                    // Add projections
-                    services.AddSingleton<SciFiMoviesProjection>();
-                    services.AddSingleton<CrimeMovieProjection>();
                 });
     }
 }

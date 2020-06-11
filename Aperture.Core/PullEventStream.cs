@@ -18,13 +18,18 @@ namespace Aperture.Core
     public class PullEventStream : IStreamEvents
     {
         private readonly IEventStore _eventStore;
-
-        // TODO 
-        // - configure count, pullInterval?
+        
+        private readonly Config _config = new Config();
 
         public PullEventStream(IEventStore eventStore)
         {
             _eventStore = eventStore;
+        }
+        
+        public PullEventStream(IEventStore eventStore, Config config)
+        {
+            _eventStore = eventStore;
+            _config = config;
         }
 
         public async Task SubscribeAsync(
@@ -41,10 +46,10 @@ namespace Aperture.Core
             {
                 ct.ThrowIfCancellationRequested();
 
-                await Task.Delay(1000, ct);
+                await Task.Delay(_config.PullInterval, ct);
 
                 var eventBatch =
-                    (await _eventStore.LoadEventsAsync(projection, offset, 100))
+                    (await _eventStore.LoadEventsAsync(projection, offset, _config.BatchSize))
                     .ToArray();
 
                 foreach (var eventData in eventBatch)
@@ -52,6 +57,13 @@ namespace Aperture.Core
 
                 offset += eventBatch.Count();
             }
+        }
+
+        public class Config
+        {
+            public TimeSpan PullInterval { get; set; } = TimeSpan.FromMilliseconds(200);
+
+            public int BatchSize { get; set; } = 100;
         }
     }
 }

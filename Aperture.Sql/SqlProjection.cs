@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System.Transactions;
 using Aperture.Core;
 
-namespace Aperture.sql
+namespace Aperture.Sql
 {
     public class SqlProjection : ApertureProjection
     {
@@ -12,11 +12,11 @@ namespace Aperture.sql
         private readonly TransactionOptions _txOptions
             = new TransactionOptions
             {
-                // TODO This should probably be higher since it affects event handler also. Or configurable.
+                // TODO This should probably be higher since it affects event handler also. Or configurable?
                 IsolationLevel = IsolationLevel.ReadUncommitted
             };
 
-        public SqlProjection(ITrackOffset offsetTracker) : base(offsetTracker)
+        protected SqlProjection(ITrackOffset offsetTracker) : base(offsetTracker)
         {
             _offsetTracker = offsetTracker;
         }
@@ -24,6 +24,7 @@ namespace Aperture.sql
         // TODO - Implement offset tracker also in this project (along with automatic table creation)
         protected override async Task TrackAndHandleEventAsync(Type projection, EventData eventData)
         {
+            // TODO - We need a row level lock
             using (var txScope = new TransactionScope(
                 TransactionScopeOption.Required,
                 _txOptions,

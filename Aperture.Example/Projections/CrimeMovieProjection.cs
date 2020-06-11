@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Aperture.Core;
 using Aperture.Example.Events;
-using Aperture.sql;
+using Aperture.Sql;
 using Microsoft.Extensions.Logging;
 
 namespace Aperture.Example.Projections

@@ -8,15 +8,17 @@ namespace Aperture.Core.SupervisionStrategies
     {
         public override async Task Run(IStreamEvents streamEvents, IProjectEvents projection, CancellationToken ct)
         {
-            try
+            while (true)
             {
-                await base.Run(streamEvents, projection, ct);
-            }
-            catch (Exception e)
-            {
-                // TODO - Restart immediately
-                Console.WriteLine(e);
-                throw;
+                try
+                {
+                    await base.Run(streamEvents, projection, ct);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Restarting {projection.GetType().Name}");
+                    Console.WriteLine(e);
+                }
             }
         }
     }

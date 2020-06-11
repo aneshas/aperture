@@ -11,6 +11,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Aperture.Core\Aperture.Core.csproj" />
-      <ProjectReference Include="..\Aperture.sql\Aperture.sql.csproj" />
+      <ProjectReference Include="..\Aperture.Sql\Aperture.Sql.csproj" />
     </ItemGroup>
 </Project>

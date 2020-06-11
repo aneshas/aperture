@@ -73,22 +73,11 @@ namespace Aperture.Tests
             var agent = ApertureAgentBuilder
                 .CreateDefault()
                 .AddProjection(new CrimeMoviesProjection(null))
-                .AddProjection<SciFiMoviesProjection>()
                 // Override default settings
                 .UseEventStream(null)
                 .UseSupervisor(new RestartWithBackOff()) // TODO - Make this one default?
                 .UseRestartWithBackOffSupervision()
-                .UseCancellationTokenSource(null)
-                .Configure(cfg =>
-                {
-                    // TODO Use methods
-                    // TODO - what do we configure here?
-                    // Figure out what to configure here
-                    // probably stuff that would be used by multiple components, maybe:
-                    // logger ?
-                    // exception handler ?
-                    // exception loggers
-                });
+                .UseCancellationTokenSource(null);
 
             agent.StartAsync();
             agent.Stop();

@@ -1,7 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Aperture.Core;
 using Aperture.Example.Events;
-using Aperture.sql;
+using Aperture.Sql;
 using Microsoft.Extensions.Logging;
 
 namespace Aperture.Example.Projections
@@ -18,6 +19,7 @@ namespace Aperture.Example.Projections
 
         public Task HandleAsync(MovieAddedToCatalogue @event)
         {
+            throw new NotImplementedException();
             if (@event.Genre != Genre.SciFi) return Task.CompletedTask;
             
             _logger.LogInformation($"Saving {@event.Title}.");

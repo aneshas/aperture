@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Aperture.Core;
-using Aperture.sql;
+using Aperture.Sql;
 
 namespace Aperture.Tests.Mocks
 {

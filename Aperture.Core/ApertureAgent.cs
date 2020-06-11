@@ -18,8 +18,6 @@ namespace Aperture.Core
 
         private CancellationToken? _token;
 
-        private readonly ApertureConfiguration _configuration = new ApertureConfiguration();
-
         private readonly List<IProjectEvents> _projections = new List<IProjectEvents>();
 
         private ApertureAgent()
@@ -65,31 +63,16 @@ namespace Aperture.Core
 
         public ApertureAgent AddProjection(IProjectEvents projection)
         {
-            // TODO - ignore or throw if already running
             _projections.Add(projection);
-
-            return this;
-        }
-
-        public ApertureAgent AddProjection<T>() where T : IProjectEvents
-        {
-            // TODO - Activate and then add to _projections
-
-            return this;
-        }
-
-        public ApertureAgent Configure(Action<ApertureConfiguration> configFunc)
-        {
-            configFunc(_configuration);
 
             return this;
         }
 
         public async Task StartAsync()
         {
-            // TODO - Validate all fields are set
-
+            // TODO - Validate all fields are set (validate start prerequisites)
             // TODO - Pass logger + exception handler to each supervisor
+            
             var tasks = _projections
                 .Select(x => _projectionSupervisor.Run(_eventStream, x, _token ?? _cts.Token));
 
@@ -105,9 +88,6 @@ namespace Aperture.Core
             }
         }
 
-        public void Stop()
-        {
-            _cts.Cancel();
-        }
+        public void Stop() => _cts.Cancel();
     }
 }

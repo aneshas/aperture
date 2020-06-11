@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aperture.Quartz", "Aperture
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aperture.Example", "Aperture.Example\Aperture.Example.csproj", "{D34DC941-EC55-4442-9807-DC03174881F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aperture.sql", "Aperture.sql\Aperture.sql.csproj", "{49EF14E8-31DA-4FBD-AA1A-FDD1C1059B68}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aperture.Sql", "Aperture.Sql\Aperture.Sql.csproj", "{49EF14E8-31DA-4FBD-AA1A-FDD1C1059B68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
