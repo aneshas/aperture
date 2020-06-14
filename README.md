@@ -11,7 +11,7 @@ Offers offset tracking and event stream adapters for :
 - PostgreSQL
 - MSSQL
 - EventStore
-- MediatR - TBD this might be useful? (provide event stream adapter for MediatR)
+- MediatR - TBD this might be useful? (provide event/command stream adapter for MediatR)
 
 These adapters come pre built, but aperture is easily extensible 
 (adheres to ports and adapters style of architecture) and allows you 
@@ -19,8 +19,12 @@ to create your own event stream/store, offset tracking, projection, failure stra
 exception handling and logging adapters.
 
 ## Alternative use cases
-Due to the nature of projections Aperture can also be used to:
+Due to the nature of projections Aperture (being a simple adapters), they
+could also be used for varieaty of other use cases such as, but not limited to:
 - Implement outbox pattern 
+- Command sourcing (use command stream instead of event stream) - note that
+how they act as driving adapters (primary) here instead of driven (secondary).
+(TODO - Check primary secondary wording)
 
 ## Abstractions
 Offset tracking adapters and Projection adapters are deliberately
@@ -38,6 +42,8 @@ Or use any other combination of offset tracking and projection adapters
 TODO
 List extendable adapters here and explain each (don't to forget to explain
 actor model - like supervisors and the idea behind them)
+
+Explain Core implementations
 
 ## Example project
 

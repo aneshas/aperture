@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Aperture.Example.Projections
 {
-    public class SciFiMoviesProjection : SqlProjection, IHandleEvent<MovieAddedToCatalogue>
+    public class SciFiMoviesProjection : SqlProjection, IHandle<MovieAddedToCatalogue>
     {
         private readonly ILogger<Worker> _logger;
 
@@ -19,12 +19,14 @@ namespace Aperture.Example.Projections
 
         public Task HandleAsync(MovieAddedToCatalogue @event)
         {
+            _logger.LogError(">>>>>>>>>>>>>>>>>>>>>>>> Restarting...");
             throw new NotImplementedException();
-            if (@event.Genre != Genre.SciFi) return Task.CompletedTask;
             
-            _logger.LogInformation($"Saving {@event.Title}.");
-
-            return Task.CompletedTask;
+            // if (@event.Genre != Genre.SciFi) return Task.CompletedTask;
+            //
+            // _logger.LogInformation($"Saving {@event.Title}.");
+            //
+            // return Task.CompletedTask;
         }
     }
 }

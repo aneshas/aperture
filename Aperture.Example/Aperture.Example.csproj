@@ -3,6 +3,7 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <UserSecretsId>dotnet-Aperture.Example-892A66DD-3BFE-42B7-9999-D8B3FE52F459</UserSecretsId>
+        <LangVersion>8</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
@@ -11,6 +12,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Aperture.Core\Aperture.Core.csproj" />
+      <ProjectReference Include="..\Aperture.Polly\Aperture.Polly.csproj" />
       <ProjectReference Include="..\Aperture.Sql\Aperture.Sql.csproj" />
     </ItemGroup>
 </Project>

@@ -9,7 +9,7 @@ namespace Aperture.Core
     {
         private readonly ITrackOffset _offsetTracker;
 
-        private readonly Type _handlerType = typeof(IHandleEvent<>);
+        private readonly Type _handlerType = typeof(IHandle<>);
 
         protected ApertureProjection()
         {

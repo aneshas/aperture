@@ -16,7 +16,7 @@
         <e p="ApertureAgentBuilder.cs" t="Include" />
         <e p="ApertureProjection.cs" t="Include" />
         <e p="EventData.cs" t="Include" />
-        <e p="IHandleEvent.cs" t="Include" />
+        <e p="IHandle.cs" t="Include" />
         <e p="IProjectEvents.cs" t="Include" />
         <e p="IStreamEvents.cs" t="Include" />
         <e p="ISuperviseProjection.cs" t="Include" />
@@ -24,15 +24,17 @@
         <e p="NoOpOffsetTracker.cs" t="Include" />
         <e p="Projection.cs" t="Include" />
         <e p="PullEventStream.cs" t="Include" />
-        <e p="SupervisionStrategies" t="Include">
+        <e p="Supervisors" t="Include">
           <e p="ApertureAgentExtensions.cs" t="Include" />
           <e p="OneForAll.cs" t="Include" />
           <e p="OneForOne.cs" t="Include" />
-          <e p="RestartWithBackOff.cs" t="Include" />
         </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="Aperture.Core.AssemblyInfo.cs" t="Include" />
+            </e>
             <e p="netstandard2.1" t="Include">
               <e p="Aperture.Core.AssemblyInfo.cs" t="Include" />
             </e>
@@ -72,20 +74,18 @@
           </e>
         </e>
       </e>
-      <e p="Aperture.Quartz" t="IncludeRecursive">
-        <e p="Aperture.Quartz.csproj" t="IncludeRecursive" />
-        <e p="EventBatchRequest.cs" t="Include" />
-        <e p="EventBatchResponse.cs" t="Include" />
-        <e p="IEventStore.cs" t="Include" />
-        <e p="ISubscriptionBroker.cs" t="Include" />
-        <e p="LoadEventsJob.cs" t="Include" />
-        <e p="PullEventStream.cs" t="Include" />
-        <e p="Subscription.cs" t="Include" />
+      <e p="Aperture.Polly" t="IncludeRecursive">
+        <e p="Aperture.Polly.csproj" t="IncludeRecursive" />
+        <e p="ApertureAgentExtensions.cs" t="Include" />
+        <e p="RestartWithBackOff.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="Aperture.Polly.AssemblyInfo.cs" t="Include" />
+            </e>
             <e p="netstandard2.1" t="Include">
-              <e p="Aperture.Quartz.AssemblyInfo.cs" t="Include" />
+              <e p="Aperture.Polly.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
         </e>
@@ -97,6 +97,9 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="Aperture.Sql.AssemblyInfo.cs" t="Include" />
+            </e>
             <e p="netstandard2.1" t="Include">
               <e p="Aperture.Sql.AssemblyInfo.cs" t="Include" />
             </e>
@@ -105,25 +108,25 @@
       </e>
       <e p="Aperture.Tests" t="IncludeRecursive">
         <e p="Aperture.Tests.csproj" t="IncludeRecursive" />
-        <e p="ApertureAgentTests.cs" t="Include" />
-        <e p="ApertureProjectionTests.cs" t="Include" />
-        <e p="Mocks" t="Include">
-          <e p="CrimeMoviesProjection.cs" t="Include" />
-          <e p="EventStore.cs" t="Include" />
-          <e p="EventStream.cs" t="Include" />
-          <e p="Genre.cs" t="Include" />
-          <e p="IEvent.cs" t="Include" />
-          <e p="MovieAddedToCatalogue.cs" t="Include" />
-          <e p="MovieWasRated.cs" t="Include" />
-          <e p="MovieWasRemoved.cs" t="Include" />
-          <e p="MoviesApertureProjection.cs" t="Include" />
-          <e p="SciFiMoviesProjection.cs" t="Include" />
-        </e>
-        <e p="Quartz" t="Include">
-          <e p="FooProjection.cs" t="Include" />
+        <e p="Core" t="Include">
+          <e p="ApertureAgentTests.cs" t="Include" />
+          <e p="ApertureProjectionTests.cs" t="Include" />
+          <e p="Mocks" t="Include">
+            <e p="CrimeMoviesProjection.cs" t="Include" />
+            <e p="EventStore.cs" t="Include" />
+            <e p="EventStream.cs" t="Include" />
+            <e p="Genre.cs" t="Include" />
+            <e p="IEvent.cs" t="Include" />
+            <e p="MovieAddedToCatalogue.cs" t="Include" />
+            <e p="MovieWasRated.cs" t="Include" />
+            <e p="MovieWasRemoved.cs" t="Include" />
+            <e p="MoviesApertureProjection.cs" t="Include" />
+            <e p="SciFiMoviesProjection.cs" t="Include" />
+          </e>
           <e p="PullEventStreamTests.cs" t="Include" />
-          <e p="SubscriptionTests.cs" t="Include" />
+          <e p="Supervisors" t="Include" />
         </e>
+        <e p="Sql" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">

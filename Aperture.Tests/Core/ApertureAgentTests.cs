@@ -2,19 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Aperture.Core;
-using Aperture.Core.SupervisionStrategies;
-using Aperture.Tests.Mocks;
+using Aperture.Tests.Core.Mocks;
 using FluentAssertions;
 using Moq;
 using Xunit;
 
-namespace Aperture.Tests
+namespace Aperture.Tests.Core
 {
     public class ApertureAgentTests
     {
         [Fact]
-        public void Default_Configuration_Projects_Events()
+        public async Task Default_Configuration_Projects_Events()
         {
             var sciFiEvents = new List<IEvent>
             {
@@ -28,11 +28,17 @@ namespace Aperture.Tests
                 new MovieAddedToCatalogue("A second movie", Genre.Crime),
                 new MovieAddedToCatalogue("Another movie", Genre.Crime)
             };
-            
-            var eventStore = new EventStore(
-                sciFiEvents.Concat(crimeEvents).ToList() 
-            );
 
+            var eventStream = new PullEventStream(
+                new EventStore(
+                    sciFiEvents.Concat(crimeEvents).ToList()
+                ),
+                new PullEventStream.Config
+                {
+                    PullInterval = TimeSpan.FromMilliseconds(10)
+                }
+            );
+            
             var offsetTracker = new Mock<ITrackOffset>();
 
             offsetTracker
@@ -42,15 +48,14 @@ namespace Aperture.Tests
             var sciFiProjection = new SciFiMoviesProjection(offsetTracker.Object);
             var crimeProjection = new CrimeMoviesProjection(offsetTracker.Object);
 
-            // TODO - Figure out how to complete on success 
-            var cts = new CancellationTokenSource(1000);
+            var cts = new CancellationTokenSource(100);
 
-            // TODO - Add mock event stream
-            ApertureAgentBuilder
+            await ApertureAgentBuilder
                 .CreateDefault()
                 .UseCancellationTokenSource(cts)
                 .AddProjection(sciFiProjection)
                 .AddProjection(crimeProjection)
+                .UseEventStream(eventStream)
                 .StartAsync();
 
             sciFiProjection.Events
@@ -62,25 +67,6 @@ namespace Aperture.Tests
                 .BeEquivalentTo(crimeEvents);
         }
         
-        // TODO - Test cancellation
         // TODO - Add more "load" tests
-
-        [Fact]
-        public void ReferenceTest()
-        {
-            // TODO - Write first integration test - make it simple
-
-            var agent = ApertureAgentBuilder
-                .CreateDefault()
-                .AddProjection(new CrimeMoviesProjection(null))
-                // Override default settings
-                .UseEventStream(null)
-                .UseSupervisor(new RestartWithBackOff()) // TODO - Make this one default?
-                .UseRestartWithBackOffSupervision()
-                .UseCancellationTokenSource(null);
-
-            agent.StartAsync();
-            agent.Stop();
-        }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Aperture.Tests.Mocks
+﻿namespace Aperture.Tests.Core.Mocks
 {
     public class MovieAddedToCatalogue : IEvent
     {

@@ -21,19 +21,17 @@ namespace Aperture.Sql
             _offsetTracker = offsetTracker;
         }
 
-        // TODO - Implement offset tracker also in this project (along with automatic table creation)
         protected override async Task TrackAndHandleEventAsync(Type projection, EventData eventData)
         {
-            using (var txScope = new TransactionScope(
+            using var txScope = new TransactionScope(
                 TransactionScopeOption.Required,
                 _txOptions,
-                TransactionScopeAsyncFlowOption.Enabled))
-            {
-                await HandleEventAsync(eventData.Event);
-                await _offsetTracker.SaveOffsetAsync(projection, eventData.Offset);
+                TransactionScopeAsyncFlowOption.Enabled);
+            
+            await HandleEventAsync(eventData.Event);
+            await _offsetTracker.SaveOffsetAsync(projection, eventData.Offset);
 
-                txScope.Complete();
-            }
+            txScope.Complete();
         }
     }
 }

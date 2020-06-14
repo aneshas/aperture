@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Aperture.Core.SupervisionStrategies
+namespace Aperture.Core.Supervisors
 {
     public class OneForOne : OneForAll
     {
@@ -14,10 +14,9 @@ namespace Aperture.Core.SupervisionStrategies
                 {
                     await base.Run(streamEvents, projection, ct);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
-                    Console.WriteLine($"Restarting {projection.GetType().Name}");
-                    Console.WriteLine(e);
+                    // TODO - Check max restart count 
                 }
             }
         }

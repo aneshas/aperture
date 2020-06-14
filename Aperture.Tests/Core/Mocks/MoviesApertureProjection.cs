@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Aperture.Core;
 
-namespace Aperture.Tests.Mocks
+namespace Aperture.Tests.Core.Mocks
 {
     public class MoviesApertureProjection : ApertureProjection,
-        IHandleEvent<MovieAddedToCatalogue>,
-        IHandleEvent<MovieWasRated>
+        IHandle<MovieAddedToCatalogue>,
+        IHandle<MovieWasRated>
     {
         public List<IEvent> Events { get; } = new List<IEvent>();
 

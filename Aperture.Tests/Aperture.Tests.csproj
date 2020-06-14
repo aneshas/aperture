@@ -19,8 +19,12 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Aperture.Core\Aperture.Core.csproj" />
-      <ProjectReference Include="..\Aperture.Quartz\Aperture.Quartz.csproj" />
       <ProjectReference Include="..\Aperture.Sql\Aperture.Sql.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Core\Supervisors" />
+      <Folder Include="Sql" />
     </ItemGroup>
 
 </Project>

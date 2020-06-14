@@ -1,6 +1,7 @@
 using System;
 using Aperture.Core;
 using Aperture.Example.Projections;
+using Aperture.Polly;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Aperture.Example.Infrastructure
@@ -18,6 +19,7 @@ namespace Aperture.Example.Infrastructure
                     .CreateDefault()
                     .AddProjection(ctx.GetService<SciFiMoviesProjection>())
                     .AddProjection(ctx.GetService<CrimeMovieProjection>())
+                    .UseRestartWithBackOffSupervision()
                     .UseEventStream(ctx.GetService<IStreamEvents>()));
         }
 

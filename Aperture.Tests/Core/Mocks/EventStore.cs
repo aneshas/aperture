@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Aperture.Core;
 
-namespace Aperture.Tests.Mocks
+namespace Aperture.Tests.Core.Mocks
 {
-    public class EventStore 
+    public class EventStore : IEventStore
     {
         public List<IEvent> Events { get; }
 

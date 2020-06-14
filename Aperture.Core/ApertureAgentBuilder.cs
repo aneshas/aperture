@@ -1,4 +1,4 @@
-﻿using Aperture.Core.SupervisionStrategies;
+﻿using Aperture.Core.Supervisors;
 
 namespace Aperture.Core
 {
@@ -7,6 +7,6 @@ namespace Aperture.Core
         public static ApertureAgent CreateDefault() =>
             ApertureAgent
                 .Instance()
-                .UseRestartWithBackOffSupervision();
+                .UseOneForOneSupervision();
     }
 }

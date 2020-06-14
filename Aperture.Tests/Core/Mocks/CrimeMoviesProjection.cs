@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 using Aperture.Core;
 using Aperture.Sql;
 
-namespace Aperture.Tests.Mocks
+namespace Aperture.Tests.Core.Mocks
 {
     public class CrimeMoviesProjection : SqlProjection,
-        IHandleEvent<MovieAddedToCatalogue>
+        IHandle<MovieAddedToCatalogue>
     {
         public List<IEvent> Events { get; } = new List<IEvent>();
 

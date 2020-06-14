@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Aperture.Example.Projections
 {
-    public class CrimeMovieProjection : SqlProjection, IHandleEvent<MovieAddedToCatalogue>
+    public class CrimeMovieProjection : SqlProjection, IHandle<MovieAddedToCatalogue>
     {
         private readonly ILogger<Worker> _logger;
 

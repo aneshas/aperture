@@ -2,7 +2,7 @@
 
 namespace Aperture.Core
 {
-    public interface IHandleEvent<in T>
+    public interface IHandle<in T>
     {
         Task HandleAsync(T @event);
     }

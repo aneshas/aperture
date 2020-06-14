@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Aperture.Core;
 
-namespace Aperture.Tests.Mocks
+namespace Aperture.Tests.Core.Mocks
 {
     public class EventStream : IStreamEvents
     {

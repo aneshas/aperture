@@ -4,12 +4,12 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Aperture.Core;
-using Aperture.Tests.Mocks;
+using Aperture.Tests.Core.Mocks;
 using FluentAssertions;
 using Moq;
 using Xunit;
 
-namespace Aperture.Tests
+namespace Aperture.Tests.Core
 {
     public class ApertureProjectionTests
     {
