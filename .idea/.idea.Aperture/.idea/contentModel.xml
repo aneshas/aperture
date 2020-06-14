@@ -21,6 +21,7 @@
         <e p="IStreamEvents.cs" t="Include" />
         <e p="ISuperviseProjection.cs" t="Include" />
         <e p="ITrackOffset.cs" t="Include" />
+        <e p="NoOpOffsetTracker.cs" t="Include" />
         <e p="Projection.cs" t="Include" />
         <e p="PullEventStream.cs" t="Include" />
         <e p="SupervisionStrategies" t="Include">
@@ -91,7 +92,7 @@
       </e>
       <e p="Aperture.Sql" t="IncludeRecursive">
         <e p="Aperture.Sql.csproj" t="IncludeRecursive" />
-        <e p="SqlOffsetTracker.cs" t="Include" />
+        <e p="PostgresOffsetTracker.cs" t="Include" />
         <e p="SqlProjection.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">

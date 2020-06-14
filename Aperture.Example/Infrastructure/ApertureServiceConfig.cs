@@ -1,6 +1,5 @@
 using System;
 using Aperture.Core;
-using Aperture.Core.SupervisionStrategies;
 using Aperture.Example.Projections;
 using Microsoft.Extensions.DependencyInjection;
 

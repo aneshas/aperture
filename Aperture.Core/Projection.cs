@@ -7,6 +7,10 @@ namespace Aperture.Core
     {
         private readonly ITrackOffset _offsetTracker;
 
+        public Projection()
+        {
+        }
+
         public Projection(ITrackOffset offsetTracker) : base(offsetTracker)
         {
             _offsetTracker = offsetTracker;

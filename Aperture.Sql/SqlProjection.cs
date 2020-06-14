@@ -13,7 +13,7 @@ namespace Aperture.Sql
             = new TransactionOptions
             {
                 // TODO This should probably be higher since it affects event handler also. Or configurable?
-                IsolationLevel = IsolationLevel.ReadUncommitted
+                IsolationLevel = IsolationLevel.RepeatableRead
             };
 
         protected SqlProjection(ITrackOffset offsetTracker) : base(offsetTracker)
@@ -24,7 +24,6 @@ namespace Aperture.Sql
         // TODO - Implement offset tracker also in this project (along with automatic table creation)
         protected override async Task TrackAndHandleEventAsync(Type projection, EventData eventData)
         {
-            // TODO - We need a row level lock
             using (var txScope = new TransactionScope(
                 TransactionScopeOption.Required,
                 _txOptions,

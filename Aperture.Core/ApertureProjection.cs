@@ -11,6 +11,11 @@ namespace Aperture.Core
 
         private readonly Type _handlerType = typeof(IHandleEvent<>);
 
+        protected ApertureProjection()
+        {
+            _offsetTracker = new NoOpOffsetTracker();
+        }
+        
         protected ApertureProjection(ITrackOffset offsetTracker)
         {
             _offsetTracker = offsetTracker;
