@@ -26,11 +26,23 @@ namespace Aperture.Core
             var projection = GetType();
             var projectionOffset = await _offsetTracker.GetOffsetAsync(projection);
 
-            await streamEvents.SubscribeAsync(
-                projection,
-                projectionOffset,
-                ct,
-                async data => await TrackAndHandleEventAsync(projection, data));
+            try
+            {
+                await streamEvents.SubscribeAsync(
+                    projection,
+                    projectionOffset,
+                    ct,
+                    async data => await TrackAndHandleEventAsync(projection, data));
+            }
+            catch (OperationCanceledException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ApertureProjectionException(
+                    "Exception encountered while projecting events, see inner exception for more details", e);
+            }
         }
 
         protected abstract Task TrackAndHandleEventAsync(Type projection, EventData eventData);

@@ -18,7 +18,7 @@ namespace Aperture.Core.Supervisors
                 {
                     await base.Run(streamEvents, projection, handleException, ct);
                 }
-                catch (Exception e)
+                catch (ApertureProjectionException e)
                 {
                     handleException(e);
                     // TODO - Add max restarts and check max restart count (per projection) 

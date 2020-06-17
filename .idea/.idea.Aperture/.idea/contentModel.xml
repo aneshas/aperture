@@ -15,6 +15,7 @@
         <e p="ApertureAgent.cs" t="Include" />
         <e p="ApertureAgentBuilder.cs" t="Include" />
         <e p="ApertureProjection.cs" t="Include" />
+        <e p="ApertureProjectionException.cs" t="Include" />
         <e p="EventData.cs" t="Include" />
         <e p="IHandle.cs" t="Include" />
         <e p="IHandleApertureException.cs" t="Include" />

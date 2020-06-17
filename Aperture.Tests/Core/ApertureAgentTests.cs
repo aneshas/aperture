@@ -50,13 +50,14 @@ namespace Aperture.Tests.Core
 
             var cts = new CancellationTokenSource(100);
 
-            await ApertureAgentBuilder
-                .CreateDefault()
-                .UseCancellationTokenSource(cts)
-                .AddProjection(sciFiProjection)
-                .AddProjection(crimeProjection)
-                .UseEventStream(eventStream)
-                .StartAsync();
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                async () => await ApertureAgentBuilder
+                    .CreateDefault()
+                    .UseCancellationTokenSource(cts)
+                    .AddProjection(sciFiProjection)
+                    .AddProjection(crimeProjection)
+                    .UseEventStream(eventStream)
+                    .StartAsync());
 
             sciFiProjection.Events
                 .Should()

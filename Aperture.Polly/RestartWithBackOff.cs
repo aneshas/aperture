@@ -31,7 +31,7 @@ namespace Aperture.Polly
                 retryCount: _config.RetryCount);
 
             await Policy
-                .Handle<Exception>() // TODO - Do we want to retry all exceptions
+                .Handle<ApertureProjectionException>()
                 .WaitAndRetryAsync(delay, (ex, _) => handleException(ex))
                 .ExecuteAsync(
                     async () => await projection.ProjectAsync(streamEvents, ct));
