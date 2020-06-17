@@ -17,6 +17,7 @@
         <e p="ApertureProjection.cs" t="Include" />
         <e p="EventData.cs" t="Include" />
         <e p="IHandle.cs" t="Include" />
+        <e p="IHandleApertureException.cs" t="Include" />
         <e p="IProjectEvents.cs" t="Include" />
         <e p="IStreamEvents.cs" t="Include" />
         <e p="ISuperviseProjection.cs" t="Include" />

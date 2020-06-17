@@ -1,39 +1,47 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Aperture.Core;
+using Aperture.Core.Supervisors;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace Aperture.Example
 {
-    public class Worker : BackgroundService
+    public class Worker : IHostedService
     {
         private readonly ApertureAgent _apertureAgent;
-        
+
         private readonly ILogger<Worker> _logger;
 
-        public Worker(ApertureAgent apertureAgent, ILogger<Worker> logger)
+        private readonly IHostApplicationLifetime _applicationLifetime;
+
+        public Worker(ApertureAgent apertureAgent, ILogger<Worker> logger, IHostApplicationLifetime applicationLifetime)
         {
             _apertureAgent = apertureAgent;
             _logger = logger;
+            _applicationLifetime = applicationLifetime;
         }
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Starting Aperture Agent...");
-
-            await _apertureAgent
-                .UseCancellationToken(stoppingToken)
-                .StartAsync();
+            try
+            {
+                await _apertureAgent
+                    .UseLogger(_logger)
+                    .UseCancellationToken(cancellationToken)
+                    .StartAsync();
+            }
+            catch (Exception)
+            {
+                _applicationLifetime.StopApplication();
+            }
         }
 
-        public override async Task StopAsync(CancellationToken cancellationToken)
+        public Task StopAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Stopping Aperture Agent...");
-            
             _apertureAgent.Stop();
-
-            await Task.Delay(2000, cancellationToken);
+            return Task.CompletedTask;
         }
     }
 }

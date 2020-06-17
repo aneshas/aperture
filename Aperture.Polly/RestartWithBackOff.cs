@@ -20,7 +20,11 @@ namespace Aperture.Polly
             _config = config;
         }
 
-        public async Task Run(IStreamEvents streamEvents, IProjectEvents projection, CancellationToken ct)
+        public async Task Run(
+            IStreamEvents streamEvents, 
+            IProjectEvents projection,
+            Action<Exception> handleException,
+            CancellationToken ct)
         {
             var delay = Backoff.DecorrelatedJitterBackoffV2(
                 medianFirstRetryDelay: _config.FirstRetryDelay,
@@ -28,7 +32,7 @@ namespace Aperture.Polly
 
             await Policy
                 .Handle<Exception>() // TODO - Do we want to retry all exceptions
-                .WaitAndRetryAsync(delay)
+                .WaitAndRetryAsync(delay, (ex, _) => handleException(ex))
                 .ExecuteAsync(
                     async () => await projection.ProjectAsync(streamEvents, ct));
         }

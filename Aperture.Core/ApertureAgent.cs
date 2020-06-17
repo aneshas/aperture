@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Aperture.Core.Supervisors;
+using Microsoft.Extensions.Logging;
 
 namespace Aperture.Core
 {
@@ -14,6 +16,10 @@ namespace Aperture.Core
 
         private ISuperviseProjection _projectionSupervisor;
 
+        private IHandleApertureException _exceptionHandler;
+        
+        private ILogger _logger;
+
         private CancellationTokenSource _cts;
 
         private CancellationToken? _token;
@@ -23,6 +29,7 @@ namespace Aperture.Core
         private ApertureAgent()
         {
             _cts = new CancellationTokenSource();
+            _projectionSupervisor = new OneForAll();
         }
 
         public static ApertureAgent Instance()
@@ -61,6 +68,20 @@ namespace Aperture.Core
             return this;
         }
 
+        public ApertureAgent UseExceptionHandler(IHandleApertureException exceptionHandler)
+        {
+            _exceptionHandler = exceptionHandler;
+
+            return this;
+        }
+
+        public ApertureAgent UseLogger(ILogger logger)
+        {
+            _logger = logger;
+
+            return this;
+        }
+
         public ApertureAgent AddProjection(IProjectEvents projection)
         {
             _projections.Add(projection);
@@ -70,21 +91,45 @@ namespace Aperture.Core
 
         public async Task StartAsync()
         {
-            // TODO - Validate all fields are set (validate start prerequisites)
-            // TODO - Pass logger + exception handler to each supervisor
-            
-            var tasks = _projections
-                .Select(x => _projectionSupervisor.Run(_eventStream, x, _token ?? _cts.Token));
-
             try
             {
-                // We are choosing concurrency with potential parallelism instead of Parallel.Invoke
-                await Task.WhenAny(tasks);
+                CheckStartupConditions();
+
+                _logger?.LogInformation("Aperture agent starting...");
+
+                var tasks = _projections
+                    .Select(x => _projectionSupervisor.Run(_eventStream, x, HandleException, _token ?? _cts.Token));
+
+                // We are choosing concurrency with potential parallelism instead of using Parallel
+                var completedTask = await Task.WhenAny(tasks);
+                await completedTask;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                _logger?.LogCritical(e, "Aperture agent encountered an unhandled exception.");
+                HandleException(e);
                 throw;
+            }
+        }
+
+        private void CheckStartupConditions()
+        {
+            if(_eventStream == null)
+                throw new ArgumentNullException($"No Event Stream Provided");
+        }
+
+        private void HandleException(Exception e)
+        {
+            _logger?.LogError(e, "Aperture agent encountered an exception.");
+
+            try
+            {
+                _exceptionHandler?.HandleApertureException(e).GetAwaiter().GetResult();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(
+                    ex, $"Could not call external exception handler: {_exceptionHandler?.GetType().FullName}");
             }
         }
 
