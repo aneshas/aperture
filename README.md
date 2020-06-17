@@ -1,6 +1,9 @@
 # Aperture Projection Library
 
+![.NET Core](https://github.com/aneshas/aperture/workflows/.NET%20Core/badge.svg?branch=master)
+
 ## Use with Event Sourcing
+
 A thin wrapper around your projections (read model adapters) to better
 handle offset tracking and most importantly to handle failures gracefully.
 
@@ -8,25 +11,29 @@ If you are using only CQRS without the event store you could still
 use Aperture to make yourself easier.
 
 Offers offset tracking and event stream adapters for :
+
 - PostgreSQL
 - MSSQL
 - EventStore
 - MediatR - TBD this might be useful? (provide event/command stream adapter for MediatR)
 
-These adapters come pre built, but aperture is easily extensible 
-(adheres to ports and adapters style of architecture) and allows you 
+These adapters come pre built, but aperture is easily extensible
+(adheres to ports and adapters style of architecture) and allows you
 to create your own event stream/store, offset tracking, projection, failure strategy,
 exception handling and logging adapters.
 
 ## Alternative use cases
+
 Due to the nature of projections Aperture (being a simple adapters), they
 could also be used for varieaty of other use cases such as, but not limited to:
-- Implement outbox pattern 
+
+- Implement outbox pattern
 - Command sourcing (use command stream instead of event stream) - note that
-how they act as driving adapters (primary) here instead of driven (secondary).
-(TODO - Check primary secondary wording)
+  how they act as driving adapters (primary) here instead of driven (secondary).
+  (TODO - Check primary secondary wording)
 
 ## Abstractions
+
 Offset tracking adapters and Projection adapters are deliberately
 segregated so you can be as flexible as you wan't.
 
@@ -48,8 +55,9 @@ Explain Core implementations
 ## Example project
 
 ## Aperture Web Dashboard
+
 - TBD
 
 ## Guidelines for writting your own adapters
-TODO - Explain each
 
+TODO - Explain each
