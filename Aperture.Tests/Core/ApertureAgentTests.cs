@@ -48,7 +48,7 @@ namespace Aperture.Tests.Core
             var sciFiProjection = new SciFiMoviesProjection(offsetTracker.Object);
             var crimeProjection = new CrimeMoviesProjection(offsetTracker.Object);
 
-            var cts = new CancellationTokenSource(100);
+            var cts = new CancellationTokenSource(2000);
 
             await Assert.ThrowsAsync<TaskCanceledException>(
                 async () => await ApertureAgentBuilder
