@@ -19,9 +19,13 @@ jobs:
         run: dotnet restore
       - name: Build
         run: dotnet build --configuration Release --no-restore
-      - name: Pack Aperture Core
-        run: dotnet pack --configuration Release Aperture.Core
-      - name: Push Aperture.Core
+      - name: Pack Aperture.Core
+        run: dotnet pack --configuration Release Aperture.Core -o .
+      - name: Pack Aperture.Sql
+        run: dotnet pack --configuration Release Aperture.Sql -o .
+      - name: Pack Aperture.Polly
+        run: dotnet pack --configuration Release Aperture.Polly -o .
+      - name: Push packages
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_ORG_API_KEY }}
-        run: dotnet nuget push Aperture.Core/bin/Release/*.nupkg -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json
+        run: dotnet nuget push *.nupkg -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json
