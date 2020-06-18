@@ -3,11 +3,10 @@
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
         <LangVersion>8</LangVersion>
-        <PackageVersion>0.3.1</PackageVersion>
+        <PackageVersion>0.3.2</PackageVersion>
         <Title>Aperture Sql Adapters</Title>
         <Authors>Anes Hasicic</Authors>
         <Description>Aperture Sql Adapters</Description>
-        <PackageLicenseUrl>https://github.com/aneshas/aperture/blob/master/LICENSE</PackageLicenseUrl>
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     </PropertyGroup>
 
