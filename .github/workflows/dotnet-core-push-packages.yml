@@ -22,4 +22,6 @@ jobs:
       - name: Pack Aperture Core
         run: dotnet pack --configuration Release Aperture.Core
       - name: Push Aperture.Core
-        run: dotnet nuget push Aperture.Core/bin/Release/*.nupkg -k $NUGET_ORG_API_KEY -s https://api.nuget.org/v3/index.json
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_ORG_API_KEY }}
+        run: dotnet nuget push Aperture.Core/bin/Release/*.nupkg -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json
