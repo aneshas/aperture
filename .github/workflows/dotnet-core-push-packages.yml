@@ -1,4 +1,4 @@
-name: .NET Core
+name: Push packages to NuGet.org
 
 on:
   push:

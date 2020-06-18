@@ -1,7 +1,5 @@
 # Aperture Projection Library
 
-![.NET Core](https://github.com/aneshas/aperture/workflows/.NET%20Core/badge.svg?branch=master)
-
 ## Use with Event Sourcing
 
 A thin wrapper around your projections (read model adapters) to better
