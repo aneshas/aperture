@@ -3,6 +3,12 @@
     <PropertyGroup>
         <LangVersion>8</LangVersion>
         <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageVersion>0.1.0</PackageVersion>
+        <Title>Aperture Projection System</Title>
+        <Authors>Anes Hasicic</Authors>
+        <Description>Aperture Projection System Core</Description>
+        <PackageLicenseUrl>https://github.com/aneshas/aperture/blob/master/LICENSE</PackageLicenseUrl>
     </PropertyGroup>
 
     <ItemGroup>
