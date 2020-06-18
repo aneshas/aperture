@@ -1,5 +1,8 @@
 # Aperture Projection Library
 
+![Build and Test](https://github.com/aneshas/aperture/workflows/Build%20and%20Test/badge.svg)
+![Push packages to NuGet.org](https://github.com/aneshas/aperture/workflows/Push%20packages%20to%20NuGet.org/badge.svg)
+
 ## Use with Event Sourcing
 
 A thin wrapper around your projections (read model adapters) to better
