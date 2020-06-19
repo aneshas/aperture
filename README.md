@@ -9,17 +9,17 @@ A thin wrapper around your projections (read model adapters) to better
 handle offset tracking and most importantly to handle failures gracefully.
 
 If you are using only CQRS without the event store you could still
-use Aperture to make yourself easier.
+use Aperture to make your life easier.
 
-Offers offset tracking and event stream adapters for :
+Offers offset tracking and event stream adapters for:
 
 - PostgreSQL
 - MSSQL
 - EventStore
 - MediatR - TBD this might be useful? (provide event/command stream adapter for MediatR)
 
-These adapters come pre built, but aperture is easily extensible
-(adheres to ports and adapters style of architecture) and allows you
+These adapters come pre built (some in core some in adapter packages, 
+but aperture is easily extensible (adheres to ports and adapters style of architecture) and allows you
 to create your own event stream/store, offset tracking, projection, failure strategy,
 exception handling and logging adapters.
 
