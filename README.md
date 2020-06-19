@@ -18,18 +18,18 @@ Offers offset tracking and event stream adapters for:
 - EventStore
 - MediatR - TBD this might be useful? (provide event/command stream adapter for MediatR)
 
-These adapters come pre built (some in core some in adapter packages, 
+These adapters come pre built (some in core some in adapter packages), 
 but aperture is easily extensible (adheres to ports and adapters style of architecture) and allows you
 to create your own event stream/store, offset tracking, projection, failure strategy,
 exception handling and logging adapters.
 
 ## Alternative use cases
 
-Due to the nature of projections Aperture (being a simple adapters), they
+Due to the nature of projections Aperture (being simple adapters), they
 could also be used for varieaty of other use cases such as, but not limited to:
 
 - Implement outbox pattern
-- Command sourcing (use command stream instead of event stream) - note that
+- Async Command sourcing (use command stream instead of event stream) - note that
   how they act as driving adapters (primary) here instead of driven (secondary).
   (TODO - Check primary secondary wording)
 
