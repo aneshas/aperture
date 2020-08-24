@@ -25,7 +25,7 @@ namespace Aperture.Example.Infrastructure
 
         private static void AddDefaultPullEventStream(this IServiceCollection services)
         {
-            // Use default Event stream from Aperture.Core
+            // Use default Event stream from Aperture.Core TODO - Usw Sql EventStore
             services.AddSingleton<IEventStore, EventStore>();
             services.AddSingleton<IStreamEvents>(
                 ctx => new PullEventStream(

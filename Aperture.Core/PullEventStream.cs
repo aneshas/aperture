@@ -15,8 +15,15 @@ namespace Aperture.Core
         Task<IEnumerable<EventData>> LoadEventsAsync(Type projection, int fromOffset, int count);
     }
 
+    /// <summary>
+    /// PullEventStream is pull based event streamer for use with passive event stores (eg. sql based).
+    /// It will poll the underlying event store (anything that implements IEventStore) on a
+    /// configurable time interval for each projection subscription.
+    /// </summary>
     public class PullEventStream : IStreamEvents
     {
+        // TODO - LRU cache to minimize number of db round-trips?
+        
         private readonly IEventStore _eventStore;
         
         private readonly Config _config = new Config();

@@ -9,6 +9,9 @@ namespace Aperture.Polly
 {
     public class RestartWithBackOff : ISuperviseProjection
     {
+        // TODO - Retry aperture projection exception by default, but add ability to override
+        // (figure out which approach makes sense)
+        
         private readonly Config _config = new Config();
 
         public RestartWithBackOff()

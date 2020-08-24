@@ -53,7 +53,6 @@
         <e p="Infrastructure" t="Include">
           <e p="ApertureServiceConfig.cs" t="Include" />
           <e p="EventStore.cs" t="Include" />
-          <e p="IEventStore.cs" t="Include" />
           <e p="OffsetTracker.cs" t="Include" />
         </e>
         <e p="Program.cs" t="Include" />

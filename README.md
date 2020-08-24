@@ -62,3 +62,11 @@ Explain Core implementations
 ## Guidelines for writting your own adapters
 
 TODO - Explain each
+
+# Whishlist
+- Bulk projections (smth like buffered streams with Flush)
+- Ability to define retriable exceptions instead of retrying all ProjectionExceptions (this is probably supervisor specific)
+- LRU for pull event stream?
+- Rebuild api (state machine)
+- Check Liquid projections for other candidates that make sense
+- 
