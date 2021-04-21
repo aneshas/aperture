@@ -6,11 +6,15 @@ using Microsoft.Extensions.Logging;
 
 namespace Aperture.Example.Projections
 {
-    public class CrimeMovieProjection : SqlProjection, IHandle<MovieAddedToCatalogue>
+    public class CrimeMovieServerProjection : 
+        SqlServerProjection, 
+        // IDependOn<SomeLookupProjection>,
+        // IDependOn<AnotherLookupProjection>,
+        IHandle<MovieAddedToCatalogue>
     {
         private readonly ILogger<Worker> _logger;
 
-        public CrimeMovieProjection(ITrackOffset offsetTracker, ILogger<Worker> logger) : base(offsetTracker)
+        public CrimeMovieServerProjection(ITrackOffset offsetTracker, ILogger<Worker> logger) : base(offsetTracker)
         {
             _logger = logger;
             _logger.LogInformation($"Starting {GetType().Name}...");

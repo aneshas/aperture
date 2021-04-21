@@ -23,7 +23,7 @@ namespace Aperture.Example.Infrastructure
             
             _logger.LogError($"Loading from {fromOffset}"); 
 
-            if (projection == typeof(SciFiMoviesProjection))
+            if (projection == typeof(SciFiMoviesServerProjection))
             {
                 eventData = new List<EventData>
                 {

@@ -96,6 +96,10 @@ namespace Aperture.Core
                 CheckStartupConditions();
 
                 _logger?.LogInformation("Aperture agent starting...");
+                
+                // TODO - Lookup projections would be discovered and assigned to respective parents here
+                // They would be removed from _projections.
+                // or _eventStream would be overriden for lookups and parent projection would act as theirs eventStream
 
                 var tasks = _projections
                     .Select(x => _projectionSupervisor.Run(_eventStream, x, HandleException, _token ?? _cts.Token));

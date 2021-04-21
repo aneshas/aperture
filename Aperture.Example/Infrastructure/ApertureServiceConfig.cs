@@ -17,8 +17,8 @@ namespace Aperture.Example.Infrastructure
             services.AddSingleton(
                 ctx => ApertureAgentBuilder
                     .CreateDefault()
-                    .AddProjection(ctx.GetService<SciFiMoviesProjection>())
-                    .AddProjection(ctx.GetService<CrimeMovieProjection>())
+                    .AddProjection(ctx.GetService<SciFiMoviesServerProjection>())
+                    .AddProjection(ctx.GetService<CrimeMovieServerProjection>())
                     .UseRestartWithBackOffSupervision()
                     .UseEventStream(ctx.GetService<IStreamEvents>()));
         }
@@ -45,8 +45,8 @@ namespace Aperture.Example.Infrastructure
 
         private static void AddProjections(this IServiceCollection services)
         {
-            services.AddSingleton<SciFiMoviesProjection>();
-            services.AddSingleton<CrimeMovieProjection>();
+            services.AddSingleton<SciFiMoviesServerProjection>();
+            services.AddSingleton<CrimeMovieServerProjection>();
         }
     }
 }

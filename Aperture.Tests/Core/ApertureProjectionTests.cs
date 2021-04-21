@@ -24,7 +24,7 @@ namespace Aperture.Tests.Core
                 .Setup(t => t.GetOffsetAsync(It.IsAny<Type>()))
                 .ReturnsAsync(expectedOffset);
 
-            var projection = new MoviesApertureProjection(offsetTracker.Object);
+            var projection = new MoviesProjection(offsetTracker.Object);
             
             var eventStream = new Mock<IStreamEvents>();
 
@@ -32,7 +32,7 @@ namespace Aperture.Tests.Core
 
             eventStream.Verify(
                 stream => stream.SubscribeAsync(
-                    typeof(MoviesApertureProjection), 
+                    typeof(MoviesProjection), 
                     expectedOffset,
                     CancellationToken.None, It.IsAny<Func<EventData, Task>>()),
                 Times.Once
@@ -80,7 +80,7 @@ namespace Aperture.Tests.Core
                 .BeEquivalentTo(events.Where(x => !(x is MovieWasRemoved)));
         }
 
-        private MoviesApertureProjection MockProjection()
+        private MoviesProjection MockProjection()
         {
             var offsetTracker = new Mock<ITrackOffset>();
 
@@ -88,7 +88,7 @@ namespace Aperture.Tests.Core
                 .Setup(t => t.GetOffsetAsync(It.IsAny<Type>()))
                 .ReturnsAsync(0);
 
-            return new MoviesApertureProjection(offsetTracker.Object);
+            return new MoviesProjection(offsetTracker.Object);
         }
 
         private async Task ProjectEventsAsync(IProjectEvents projection, List<IEvent> events)

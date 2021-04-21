@@ -6,7 +6,7 @@ using Aperture.Sql;
 
 namespace Aperture.Tests.Core.Mocks
 {
-    public class CrimeMoviesProjection : SqlProjection,
+    public class CrimeMoviesProjection : SqlServerProjection,
         IHandle<MovieAddedToCatalogue>
     {
         public List<IEvent> Events { get; } = new List<IEvent>();
