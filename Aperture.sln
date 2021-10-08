@@ -4,10 +4,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aperture.Core", "Aperture.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aperture.Tests", "Aperture.Tests\Aperture.Tests.csproj", "{6818CC68-409B-4B3A-B0FA-C5E65A4D76A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aperture.Example", "Aperture.Example\Aperture.Example.csproj", "{D34DC941-EC55-4442-9807-DC03174881F1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aperture.Sql", "Aperture.Sql\Aperture.Sql.csproj", "{49EF14E8-31DA-4FBD-AA1A-FDD1C1059B68}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aperture.Polly", "Aperture.Polly\Aperture.Polly.csproj", "{2886C6DE-4D77-413E-A87A-BFE4F0B5964F}"
 EndProject
 Global
@@ -24,14 +20,6 @@ Global
 		{6818CC68-409B-4B3A-B0FA-C5E65A4D76A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6818CC68-409B-4B3A-B0FA-C5E65A4D76A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6818CC68-409B-4B3A-B0FA-C5E65A4D76A3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D34DC941-EC55-4442-9807-DC03174881F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D34DC941-EC55-4442-9807-DC03174881F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D34DC941-EC55-4442-9807-DC03174881F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D34DC941-EC55-4442-9807-DC03174881F1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{49EF14E8-31DA-4FBD-AA1A-FDD1C1059B68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{49EF14E8-31DA-4FBD-AA1A-FDD1C1059B68}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{49EF14E8-31DA-4FBD-AA1A-FDD1C1059B68}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{49EF14E8-31DA-4FBD-AA1A-FDD1C1059B68}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2886C6DE-4D77-413E-A87A-BFE4F0B5964F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2886C6DE-4D77-413E-A87A-BFE4F0B5964F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2886C6DE-4D77-413E-A87A-BFE4F0B5964F}.Release|Any CPU.ActiveCfg = Release|Any CPU

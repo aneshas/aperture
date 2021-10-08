@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Aperture.Core;
-using Aperture.Sql;
 
 namespace Aperture.Tests.Core.Mocks
 {
-    public class CrimeMoviesProjection : SqlServerProjection,
+    public class CrimeMoviesProjection : Projection,
         IHandle<MovieAddedToCatalogue>
     {
         public List<IEvent> Events { get; } = new List<IEvent>();
