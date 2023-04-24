@@ -1,4 +1,4 @@
-name: Push packages to NuGet.org
+n: Push packages to NuGet.org
 
 on:
   push:
@@ -26,4 +26,4 @@ jobs:
       - name: Push packages
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_ORG_API_KEY }}
-        run: dotnet nuget push **/*.nupkg -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json -n true
+        run: dotnet nuget push **/*.nupkg -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json -n
