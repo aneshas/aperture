@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,6 +11,8 @@ namespace Aperture.Core
         private readonly ITrackOffset _offsetTracker;
 
         private readonly Type _handlerType = typeof(IHandle<>);
+
+        private List<Type> _types;
 
         protected Projection()
         {
@@ -59,12 +62,16 @@ namespace Aperture.Core
             // Calling from here would ensure that exceptions from lookups are propagated 
             // which means parent projection does not get built if lookups throw ex.
 
-            var handler = GetType()
+            _types ??= GetType()
                 .GetInterfaces()
-                .FirstOrDefault(x =>
+                .Where(x =>
                     x.IsGenericType
-                    && x.GetGenericTypeDefinition() == _handlerType
-                    && x.GenericTypeArguments.First() == @event.GetType());
+                    && x.GetGenericTypeDefinition() == _handlerType)
+                .ToList();
+
+            var handler = _types
+                .FirstOrDefault(x =>
+                    x.GenericTypeArguments.First() == @event.GetType());
 
             if (handler == null) return;
 

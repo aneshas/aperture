@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>net7.0</TargetFramework>
 
         <IsPackable>false</IsPackable>
 
@@ -19,8 +19,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Aperture.Core\Aperture.Core.csproj" />
-      <ProjectReference Include="..\Aperture.Postgres\Aperture.Postgres.csproj" />
-      <ProjectReference Include="..\Aperture.Sql\Aperture.Sql.csproj" />
     </ItemGroup>
 
 </Project>

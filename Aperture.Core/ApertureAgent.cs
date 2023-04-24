@@ -24,7 +24,7 @@ namespace Aperture.Core
 
         private CancellationToken? _token;
 
-        private readonly List<IProjectEvents> _projections = new List<IProjectEvents>();
+        private readonly List<IProjectEvents> _projections = new();
 
         private ApertureAgent()
         {

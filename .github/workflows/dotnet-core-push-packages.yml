@@ -14,15 +14,13 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 3.1.101
+          dotnet-version: 7.0.x
       - name: Install dependencies
         run: dotnet restore
       - name: Build
         run: dotnet build --configuration Release --no-restore
       - name: Pack Aperture.Core
         run: dotnet pack --configuration Release Aperture.Core -o .
-      - name: Pack Aperture.Sql
-        run: dotnet pack --configuration Release Aperture.Sql -o .
       - name: Pack Aperture.Polly
         run: dotnet pack --configuration Release Aperture.Polly -o .
       - name: Push packages

@@ -2,8 +2,8 @@
 
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
-        <LangVersion>8</LangVersion>
-        <PackageVersion>0.3.4</PackageVersion>
+        <LangVersion>9</LangVersion>
+        <PackageVersion>0.3.5</PackageVersion>
         <Title>Aperture Polly Adapters</Title>
         <Authors>Anes Hasicic</Authors>
         <Description>Aperture Polly Adapters</Description>
