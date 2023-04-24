@@ -1,4 +1,4 @@
-n: Push packages to NuGet.org
+name: Push packages to NuGet.org
 
 on:
   push:
