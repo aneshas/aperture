@@ -3,7 +3,7 @@
     <PropertyGroup>
         <LangVersion>9</LangVersion>
         <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
-        <PackageVersion>0.3.6</PackageVersion>
+        <PackageVersion>0.3.8</PackageVersion>
         <Title>Aperture Projection System</Title>
         <Authors>Anes Hasicic</Authors>
         <Description>Aperture Projection System Core</Description>
