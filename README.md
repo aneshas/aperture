@@ -3,7 +3,8 @@
 ![Build and Test](https://github.com/aneshas/aperture/workflows/Build%20and%20Test/badge.svg)
 ![Push packages to NuGet.org](https://github.com/aneshas/aperture/workflows/Push%20packages%20to%20NuGet.org/badge.svg)
 
-## Use with Event Sourcing
+## What is it?
+A blog post with a link to an example project [here](https://medium.com/@aneshas/c-event-sourcing-example-with-tactical-ddd-and-aperture-4ade39cbaac3)
 
 A set of abstractions allowing you to implement event sourcing projections
 with offset tracking and most importantly a way to handle failures gracefully.
